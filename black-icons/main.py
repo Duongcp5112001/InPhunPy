@@ -1,7 +1,6 @@
 # main.py
 import sys
 from PyQt6 import QtWidgets, QtCore, uic
-from controller import Controller
 
 class MainApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -9,8 +8,6 @@ class MainApp(QtWidgets.QMainWindow):
 
         # Load UI
         uic.loadUi("ManChinh.ui", self)
-        # Load controller
-        self.controller = Controller(self)
 
         # === HIỆN CỬA SỔ TRƯỚC ===
         self.show()
@@ -24,7 +21,7 @@ class MainApp(QtWidgets.QMainWindow):
 
         # Kích thước mong muốn
         desired_width = available.width()
-        desired_height = 1010
+        desired_height = 1012
 
         # === TÍNH Y ĐỂ PHẦN DƯỚI SÁT TASKBAR ===
         y_pos = available.bottom() - desired_height + 1  # +1 để sát, không chồng
