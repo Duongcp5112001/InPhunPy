@@ -135,7 +135,7 @@
            <enum>Qt::AutoText</enum>
           </property>
           <property name="pixmap">
-           <pixmap>../duongnh48/Downloads/logo_congty-Photoroom.png</pixmap>
+           <pixmap>assets/logo_congty-Photoroom.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -181,6 +181,12 @@
           </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
           <item>
            <widget class="QLabel" name="LabelShift">
             <property name="font">
@@ -203,7 +209,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelDateTime">
+           <widget class="QLabel" name="txtDateTime">
             <property name="font">
              <font>
               <family>Calibri</family>
@@ -228,6 +234,9 @@
     </item>
     <item>
      <widget class="QWidget" name="BodyContent" native="true">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="styleSheet">
        <string notr="true">#BodyContent {
 	background-color: #fff;
@@ -239,6 +248,9 @@
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1,1">
+       <property name="spacing">
+        <number>15</number>
+       </property>
        <item>
         <widget class="QWidget" name="widget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="10,20,45,25">
@@ -274,15 +286,6 @@
 	);
 	border: 1px solid #fb923c;
 	border-radius: 8px;
-	text-shadow: 
-    	-1px -1px 0 #000000,
-     	1px -1px 0 #000000,
-   		-1px  1px 0 #000000,
-     	1px  1px 0 #000000,
-    	-2px -2px 0 #000000,
-     	2px -2px 0 #000000,
-    	-2px  2px 0 #000000,
-     	2px  2px 0 #000000;
 }
 
 #txtTrangThai1 {
@@ -295,18 +298,79 @@
 	);
 	border: 1px solid #22c55e;
 	border-radius: 8px;
-	text-shadow: 
-    	-1px -1px 0 #000000,
-     	1px -1px 0 #000000,
-    	-1px  1px 0 #000000,
-     	1px  1px 0 #000000,
-    	-2px -2px 0 #000000,
-     	2px -2px 0 #000000,
-    	-2px  2px 0 #000000,
-     	2px  2px 0 #000000;
-}</string>
+}
+
+#labelMay1 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+    	stop: 0 #fb923c,      /* Tâm: Cam đậm */
+    	stop: 0.7 #fed7aa,    /* Giữa: Cam nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #fb923c;
+	border-radius: 8px;
+}
+
+#btnRefresh1 {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #f8f9fa,     /* Trắng sáng */
+          stop: 0.5 #e9ecef,   /* Xám nhạt */
+          stop: 1 #adb5bd      /* Xám viền */
+      );
+      color: #212529;           /* Chữ xám đậm */
+      border: 2px solid #ced4da; /* Viền xám nhạt */
+      border-radius: 8px;
+}
+
+#btnRefresh1:hover {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #ffffff,     /* Sáng hơn */
+          stop: 0.5 #f1f3f5,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}
+
+#btnRefresh1:pressed {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #e9ecef,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}
+
+</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0">
+            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,45,45">
+             <item>
+              <widget class="QPushButton" name="btnRefresh1">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QLabel" name="labelMay1">
                <property name="font">
@@ -388,7 +452,7 @@
                   <property name="font">
                    <font>
                     <family>Calibri</family>
-                    <pointsize>15</pointsize>
+                    <pointsize>17</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -409,7 +473,7 @@
                   <property name="font">
                    <font>
                     <family>Calibri</family>
-                    <pointsize>15</pointsize>
+                    <pointsize>17</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -430,7 +494,7 @@
                   <property name="font">
                    <font>
                     <family>Calibri</family>
-                    <pointsize>15</pointsize>
+                    <pointsize>17</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -547,9 +611,7 @@
           <item>
            <widget class="QWidget" name="widget_7" native="true">
             <property name="styleSheet">
-             <string notr="true">
-
-#txtBienSoXe1, #txtSanPham1, #txtSLCatLenh1, #txtSLThucXuat1, #txtSoLo1, #txtMangXuat1 {
+             <string notr="true">#txtBienSoXe1, #txtSanPham1, #txtSLCatLenh1, #txtSLThucXuat1, #txtSoLo1, #txtMangXuat1 {
 	border: 3px ridge #16a8f0;
 	border-radius: 5px;
 }</string>
@@ -656,7 +718,7 @@
                     <number>9</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>0</number>
+                    <number>9</number>
                    </property>
                    <item>
                     <widget class="QLineEdit" name="txtMaIn1">
@@ -674,6 +736,9 @@
                        <bold>true</bold>
                       </font>
                      </property>
+                     <property name="text">
+                      <string>A123456678823413</string>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -690,7 +755,7 @@
                      </property>
                      <property name="iconSize">
                       <size>
-                       <width>35</width>
+                       <width>33</width>
                        <height>33</height>
                       </size>
                      </property>
@@ -756,7 +821,7 @@
                    <item>
                     <widget class="QLineEdit" name="txtBienSoXe1">
                      <property name="enabled">
-                      <bool>false</bool>
+                      <bool>true</bool>
                      </property>
                      <property name="font">
                       <font>
@@ -765,6 +830,9 @@
                        <weight>75</weight>
                        <bold>true</bold>
                       </font>
+                     </property>
+                     <property name="text">
+                      <string>14C-12345...</string>
                      </property>
                     </widget>
                    </item>
@@ -807,7 +875,7 @@
                    <item>
                     <widget class="QLineEdit" name="txtSanPham1">
                      <property name="enabled">
-                      <bool>false</bool>
+                      <bool>true</bool>
                      </property>
                      <property name="font">
                       <font>
@@ -816,6 +884,9 @@
                        <weight>75</weight>
                        <bold>true</bold>
                       </font>
+                     </property>
+                     <property name="text">
+                      <string>JQWJKEBNJKAS</string>
                      </property>
                     </widget>
                    </item>
@@ -891,7 +962,7 @@
                       <item>
                        <widget class="QLineEdit" name="txtSLCatLenh1">
                         <property name="enabled">
-                         <bool>false</bool>
+                         <bool>true</bool>
                         </property>
                         <property name="font">
                          <font>
@@ -900,6 +971,9 @@
                           <weight>75</weight>
                           <bold>true</bold>
                          </font>
+                        </property>
+                        <property name="text">
+                         <string>10</string>
                         </property>
                        </widget>
                       </item>
@@ -952,6 +1026,9 @@
                           <bold>true</bold>
                          </font>
                         </property>
+                        <property name="text">
+                         <string>10</string>
+                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -995,7 +1072,7 @@
                    </property>
                    <item>
                     <widget class="QWidget" name="widget_23" native="true">
-                     <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,1">
+                     <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,0">
                       <property name="spacing">
                        <number>0</number>
                       </property>
@@ -1027,7 +1104,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLineEdit" name="txtSoLo1">
+                       <widget class="QComboBox" name="txtSoLo1">
                         <property name="font">
                          <font>
                           <family>Calibri</family>
@@ -1036,6 +1113,17 @@
                           <bold>true</bold>
                          </font>
                         </property>
+                        <property name="editable">
+                         <bool>false</bool>
+                        </property>
+                        <property name="currentIndex">
+                         <number>-1</number>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </item>
                        </widget>
                       </item>
                      </layout>
@@ -1043,7 +1131,7 @@
                    </item>
                    <item>
                     <widget class="QWidget" name="widget_24" native="true">
-                     <layout class="QVBoxLayout" name="verticalLayout_14" stretch="1,1">
+                     <layout class="QVBoxLayout" name="verticalLayout_14" stretch="1,0">
                       <property name="spacing">
                        <number>0</number>
                       </property>
@@ -1075,7 +1163,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLineEdit" name="txtMangXuat1">
+                       <widget class="QComboBox" name="txtMangXuat1">
                         <property name="font">
                          <font>
                           <family>Calibri</family>
@@ -1084,6 +1172,29 @@
                           <bold>true</bold>
                          </font>
                         </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="editable">
+                         <bool>false</bool>
+                        </property>
+                        <property name="currentText">
+                         <string/>
+                        </property>
+                        <property name="currentIndex">
+                         <number>-1</number>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </item>
                        </widget>
                       </item>
                      </layout>
@@ -1100,6 +1211,131 @@
           </item>
           <item>
            <widget class="QWidget" name="widget_8" native="true">
+            <property name="styleSheet">
+             <string notr="true">* {
+	 color: black;
+}
+
+/* === NÚT XANH DƯƠNG === */
+#btnCamera1, #btnChuyenMayIn1, #btnChiTiet1 {
+    border-radius: 5px;
+    border-right: 4px outset #16a8f0;
+    border-left: 4px outset #16a8f0;
+    border-top: 4px outset #16a8f0;
+    border-bottom: 4px outset #16a8f0;
+    background-color: #66cdff;
+    font-weight: bold;
+    padding: 4px 6px;   /* THÊM PADDING */
+}
+
+#btnCamera1:hover, #btnChuyenMayIn1:hover, #btnChiTiet1:hover {
+    background-color: #80d4ff;
+    border-right: 4px outset #1bb8ff;
+    border-left: 4px outset #1bb8ff;
+    border-top: 4px outset #1bb8ff;
+    border-bottom: 4px outset #1bb8ff;
+    padding: 4px 6px;
+}
+
+#btnCamera1:pressed, #btnChuyenMayIn1:pressed, #btnChiTiet1:pressed {
+    background-color: #4db8e6;
+    border-right: 4px inset #0f8cc7;
+    border-left: 4px inset #0f8cc7;
+    border-top: 4px inset #0f8cc7;
+    border-bottom: 4px inset #0f8cc7;
+    padding:4px 6px;
+}
+
+/* === NÚT BẬT IN (XANH LÁ) === */
+#btnBatIn1 {
+    border-radius: 5px;
+    border-right: 4px outset #118c1b;
+    border-left: 4px outset #118c1b;
+    border-top: 4px outset #118c1b;
+    border-bottom: 4px outset #118c1b;
+    background-color: #25fa37;
+    font-weight: bold;
+    padding:4px 6px;
+}
+
+#btnBatIn1:hover {
+    background-color: #40ff50;
+    border-right: 4px outset #14a820;
+    border-left: 4px outset #14a820;
+    border-top: 4px outset #14a820;
+    border-bottom: 4px outset #14a820;
+    padding:4px 6px;
+}
+
+#btnBatIn1:pressed {
+    background-color: #1de62d;
+    border-right: 4px inset #0d7314;
+    border-left: 4px inset #0d7314;
+    border-top: 4px inset #0d7314;
+    border-bottom: 4px inset #0d7314;
+    padding: 4px 6px;
+}
+
+/* === NÚT THÊM CHỨNG TỪ (VÀNG) === */
+#btnThemChungTu1 {
+    border-radius: 5px;
+    border-right: 4px outset #999514;
+    border-left: 4px outset #999514;
+    border-top: 4px outset #999514;
+    border-bottom: 4px outset #999514;
+    background-color: #faf202;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnThemChungTu1:hover {
+    background-color: #ffff33;
+    border-right: 4px outset #b3b317;
+    border-left: 4px outset #b3b317;
+    border-top: 4px outset #b3b317;
+    border-bottom: 4px outset #b3b317;
+    padding :4px 6px;
+}
+
+#btnThemChungTu1:pressed {
+    background-color: #e6e600;
+    border-right: 4px inset #80800f;
+    border-left: 4px inset #80800f;
+    border-top: 4px inset #80800f;
+    border-bottom: 4px inset #80800f;
+    padding: 4px 6px;
+}
+
+/* === NÚT TẮT IN (ĐỎ) === */
+#btnTatIn1 {
+    border-radius: 5px;
+    border-right: 4px outset #a61f1f;
+    border-left: 4px outset #a61f1f;
+    border-top: 4px outset #a61f1f;
+    border-bottom: 4px outset #a61f1f;
+    background-color: #ff3b3b;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnTatIn1:hover {
+    background-color: #ff5252;
+    border-right: 4px outset #c41f1f;
+    border-left: 4px outset #c41f1f;
+    border-top: 4px outset #c41f1f;
+    border-bottom: 4px outset #c41f1f;
+    padding: 4px 6px;
+}
+
+#btnTatIn1:pressed {
+    background-color: #e63333;
+    border-right: 4px inset #8c1919;
+    border-left: 4px inset #8c1919;
+    border-top: 4px inset #8c1919;
+    border-bottom: 4px inset #8c1919;
+    padding: 4px 6px;
+}</string>
+            </property>
             <layout class="QGridLayout" name="gridLayout">
              <property name="leftMargin">
               <number>0</number>
@@ -1120,16 +1356,16 @@
                  <number>20</number>
                 </property>
                 <property name="topMargin">
-                 <number>9</number>
+                 <number>0</number>
                 </property>
                 <property name="rightMargin">
                  <number>20</number>
                 </property>
                 <property name="bottomMargin">
-                 <number>9</number>
+                 <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="btnChuyenMayIn1">
+                 <widget class="QPushButton" name="btnTatIn1">
                   <property name="font">
                    <font>
                     <family>Calibri</family>
@@ -1138,18 +1374,24 @@
                     <bold>true</bold>
                    </font>
                   </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
                   <property name="text">
-                   <string>Chuyển Máy</string>
+                   <string>Tắt In</string>
                   </property>
                   <property name="icon">
                    <iconset>
-                    <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+                    <normaloff>assets/stop-button.png</normaloff>assets/stop-button.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
-                    <width>18</width>
-                    <height>18</height>
+                    <width>20</width>
+                    <height>20</height>
                    </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -1171,13 +1413,13 @@
                  <number>20</number>
                 </property>
                 <property name="topMargin">
-                 <number>3</number>
+                 <number>0</number>
                 </property>
                 <property name="rightMargin">
                  <number>20</number>
                 </property>
                 <property name="bottomMargin">
-                 <number>3</number>
+                 <number>0</number>
                 </property>
                 <item>
                  <widget class="QPushButton" name="btnCamera1">
@@ -1189,6 +1431,9 @@
                     <bold>true</bold>
                    </font>
                   </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
                   <property name="text">
                    <string>Xem Camera</string>
                   </property>
@@ -1198,8 +1443,8 @@
                   </property>
                   <property name="iconSize">
                    <size>
-                    <width>18</width>
-                    <height>18</height>
+                    <width>20</width>
+                    <height>20</height>
                    </size>
                   </property>
                  </widget>
@@ -1214,16 +1459,19 @@
                  <number>20</number>
                 </property>
                 <property name="topMargin">
-                 <number>9</number>
+                 <number>0</number>
                 </property>
                 <property name="rightMargin">
                  <number>20</number>
                 </property>
                 <property name="bottomMargin">
-                 <number>9</number>
+                 <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="pushButton_7">
+                 <widget class="QPushButton" name="btnChiTiet1">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Calibri</family>
@@ -1231,6 +1479,9 @@
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
                    <string>Chi tiết</string>
@@ -1266,7 +1517,7 @@
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="btnBatTatIn1">
+                 <widget class="QPushButton" name="btnBatIn1">
                   <property name="font">
                    <font>
                     <family>Calibri</family>
@@ -1274,6 +1525,9 @@
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
                    <string>Bật In</string>
@@ -1321,6 +1575,9 @@
                     <bold>true</bold>
                    </font>
                   </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
                   <property name="text">
                    <string>Chứng Từ</string>
                   </property>
@@ -1342,6 +1599,55 @@
                </layout>
               </widget>
              </item>
+             <item row="4" column="1">
+              <widget class="QWidget" name="widget_29" native="true">
+               <layout class="QVBoxLayout" name="verticalLayout_17">
+                <property name="leftMargin">
+                 <number>20</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>20</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="btnChuyenMayIn1">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>18</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string>Chuyển Máy</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -1349,13 +1655,4218 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_2" native="true"/>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_39">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_30" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_20" stretch="10,20,45,25">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_31" native="true">
+               <property name="styleSheet">
+                <string notr="true">*{
+	color: #ffffff;
+}
+
+#labelMay2 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+    	stop: 0 #fb923c,      /* Tâm: Cam đậm */
+    	stop: 0.7 #fed7aa,    /* Giữa: Cam nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #fb923c;
+	border-radius: 8px;
+}
+
+#txtTrangThai2 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+   		stop: 0 #22c55e,      /* Tâm: Xanh lá đậm */
+    	stop: 0.7 #86efac,    /* Giữa: Xanh lá nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #22c55e;
+	border-radius: 8px;
+}
+
+#btnRefresh2 {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #f8f9fa,     /* Trắng sáng */
+          stop: 0.5 #e9ecef,   /* Xám nhạt */
+          stop: 1 #adb5bd      /* Xám viền */
+      );
+      color: #212529;           /* Chữ xám đậm */
+      border: 2px solid #ced4da; /* Viền xám nhạt */
+      border-radius: 8px;
+}
+
+#btnRefresh2:hover {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #ffffff,     /* Sáng hơn */
+          stop: 0.5 #f1f3f5,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}
+
+#btnRefresh2:pressed {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #e9ecef,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="10,45,45">
+                <item>
+                 <widget class="QPushButton" name="btnRefresh2">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelMay2">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>MÁY 2</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="txtTrangThai2">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>DỪNG IN</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_33" native="true">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,3">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_34" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#label_11, #label_12, #label_13 {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_22">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_11">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO DỰ TÍNH</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_12">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐANG IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_13">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐÃ IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_35" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#txtBaoDangIn2, #txtBaoDaIn2, #txtBaoDuTinh2 {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-right: 3px ridge #16a8f0;
+	border-left: 3px ridge #16a8f0;
+	border-top: 3px ridge #16a8f0;
+	border-bottom: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_23">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDuTinh2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDangIn2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDaIn2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_36" native="true">
+               <property name="styleSheet">
+                <string notr="true">#txtBienSoXe2, #txtSanPham2, #txtSLCatLenh2, #txtSLThucXuat2, #txtSoLo2, #txtMangXuat2 {
+	border: 3px ridge #16a8f0;
+	border-radius: 5px;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_24" stretch="30,23,23,23">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_37" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#btnSearchMaIn2 {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+
+#txtMaIn2 {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_25" stretch="35,65">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_38" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_26">
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_14">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>15</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>MÃ IN:</string>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_39" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_14">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>9</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>9</number>
+                      </property>
+                      <item>
+                       <widget class="QLineEdit" name="txtMaIn2">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>20</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>A123456678823413</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="btnSearchMaIn2">
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>assets/loupe.png</normaloff>assets/loupe.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>33</width>
+                          <height>33</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_40" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1,1">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_41" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_27" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_15">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>BIỂN SỐ XE:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtBienSoXe2">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>14C-12345...</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_42" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_28" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_16">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>SẢN PHẨM:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtSanPham2">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>JQWJKEBNJKAS</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_43" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_16">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_44" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_45" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_29" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_17">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL CẮT LỆNH (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLCatLenh2">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_46" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_30" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_18">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL THỰC XUẤT (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLThucXuat2">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_47" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_18">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_48" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_49" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_31" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_19">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SỐ LÔ:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtSoLo2">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_50" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_32" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_20">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>MÁNG XUẤT:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtMangXuat2">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                           <property name="currentText">
+                            <string/>
+                           </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>20</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_51" native="true">
+               <property name="styleSheet">
+                <string notr="true">* {
+	 color: black;
+}
+
+/* === NÚT XANH DƯƠNG === */
+#btnCamera2, #btnChuyenMayIn2, #btnChiTiet2 {
+    border-radius: 5px;
+    border-right: 4px outset #16a8f0;
+    border-left: 4px outset #16a8f0;
+    border-top: 4px outset #16a8f0;
+    border-bottom: 4px outset #16a8f0;
+    background-color: #66cdff;
+    font-weight: bold;
+    padding: 4px 6px;   /* THÊM PADDING */
+}
+
+#btnCamera2:hover, #btnChuyenMayIn2:hover, #btnChiTiet2:hover {
+    background-color: #80d4ff;
+    border-right: 4px outset #1bb8ff;
+    border-left: 4px outset #1bb8ff;
+    border-top: 4px outset #1bb8ff;
+    border-bottom: 4px outset #1bb8ff;
+    padding: 4px 6px;
+}
+
+#btnCamera2:pressed, #btnChuyenMayIn2:pressed, #btnChiTiet2:pressed {
+    background-color: #4db8e6;
+    border-right: 4px inset #0f8cc7;
+    border-left: 4px inset #0f8cc7;
+    border-top: 4px inset #0f8cc7;
+    border-bottom: 4px inset #0f8cc7;
+    padding:4px 6px;
+}
+
+/* === NÚT BẬT IN (XANH LÁ) === */
+#btnBatIn2 {
+    border-radius: 5px;
+    border-right: 4px outset #118c1b;
+    border-left: 4px outset #118c1b;
+    border-top: 4px outset #118c1b;
+    border-bottom: 4px outset #118c1b;
+    background-color: #25fa37;
+    font-weight: bold;
+    padding:4px 6px;
+}
+
+#btnBatIn2:hover {
+    background-color: #40ff50;
+    border-right: 4px outset #14a820;
+    border-left: 4px outset #14a820;
+    border-top: 4px outset #14a820;
+    border-bottom: 4px outset #14a820;
+    padding:4px 6px;
+}
+
+#btnBatIn2:pressed {
+    background-color: #1de62d;
+    border-right: 4px inset #0d7314;
+    border-left: 4px inset #0d7314;
+    border-top: 4px inset #0d7314;
+    border-bottom: 4px inset #0d7314;
+    padding: 4px 6px;
+}
+
+/* === NÚT THÊM CHỨNG TỪ (VÀNG) === */
+#btnThemChungTu2 {
+    border-radius: 5px;
+    border-right: 4px outset #999514;
+    border-left: 4px outset #999514;
+    border-top: 4px outset #999514;
+    border-bottom: 4px outset #999514;
+    background-color: #faf202;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnThemChungTu2:hover {
+    background-color: #ffff33;
+    border-right: 4px outset #b3b317;
+    border-left: 4px outset #b3b317;
+    border-top: 4px outset #b3b317;
+    border-bottom: 4px outset #b3b317;
+    padding :4px 6px;
+}
+
+#btnThemChungTu2:pressed {
+    background-color: #e6e600;
+    border-right: 4px inset #80800f;
+    border-left: 4px inset #80800f;
+    border-top: 4px inset #80800f;
+    border-bottom: 4px inset #80800f;
+    padding: 4px 6px;
+}
+
+/* === NÚT TẮT IN (ĐỎ) === */
+#btnTatIn2 {
+    border-radius: 5px;
+    border-right: 4px outset #a61f1f;
+    border-left: 4px outset #a61f1f;
+    border-top: 4px outset #a61f1f;
+    border-bottom: 4px outset #a61f1f;
+    background-color: #ff3b3b;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnTatIn2:hover {
+    background-color: #ff5252;
+    border-right: 4px outset #c41f1f;
+    border-left: 4px outset #c41f1f;
+    border-top: 4px outset #c41f1f;
+    border-bottom: 4px outset #c41f1f;
+    padding: 4px 6px;
+}
+
+#btnTatIn2:pressed {
+    background-color: #e63333;
+    border-right: 4px inset #8c1919;
+    border-left: 4px inset #8c1919;
+    border-top: 4px inset #8c1919;
+    border-bottom: 4px inset #8c1919;
+    padding: 4px 6px;
+}</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="1" column="1">
+                 <widget class="QWidget" name="widget_52" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_33">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnTatIn2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Tắt In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/stop-button.png</normaloff>assets/stop-button.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QWidget" name="widget_53" native="true">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>8</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_34">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnCamera2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Xem Camera</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/video-camera.png</normaloff>assets/video-camera.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QWidget" name="widget_54" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_35">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChiTiet2">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chi tiết</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/info.png</normaloff>assets/info.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QWidget" name="widget_55" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_36">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnBatIn2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Bật In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/play-button-arrowhead.png</normaloff>assets/play-button-arrowhead.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QWidget" name="widget_56" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_37">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnThemChungTu2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chứng Từ</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/plus.png</normaloff>assets/plus.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>16</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QWidget" name="widget_57" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_38">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChuyenMayIn2">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chuyển Máy</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_3" native="true"/>
+        <widget class="QWidget" name="widget_3" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_58">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_58" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_40" stretch="10,20,45,25">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_59" native="true">
+               <property name="styleSheet">
+                <string notr="true">*{
+	color: #ffffff;
+}
+
+#labelMay3 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+    	stop: 0 #fb923c,      /* Tâm: Cam đậm */
+    	stop: 0.7 #fed7aa,    /* Giữa: Cam nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #fb923c;
+	border-radius: 8px;
+}
+
+#txtTrangThai3 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+   		stop: 0 #22c55e,      /* Tâm: Xanh lá đậm */
+    	stop: 0.7 #86efac,    /* Giữa: Xanh lá nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #22c55e;
+	border-radius: 8px;
+}
+
+#btnRefresh3 {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #f8f9fa,     /* Trắng sáng */
+          stop: 0.5 #e9ecef,   /* Xám nhạt */
+          stop: 1 #adb5bd      /* Xám viền */
+      );
+      color: #212529;           /* Chữ xám đậm */
+      border: 2px solid #ced4da; /* Viền xám nhạt */
+      border-radius: 8px;
+}
+
+#btnRefresh3:hover {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #ffffff,     /* Sáng hơn */
+          stop: 0.5 #f1f3f5,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}
+
+#btnRefresh3:pressed {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #e9ecef,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="10,45,45">
+                <item>
+                 <widget class="QPushButton" name="btnRefresh3">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelMay3">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>MÁY 3</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="txtTrangThai3">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>DỪNG IN</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_60" native="true">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="2,3">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_61" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#label_21, #label_22, #label_23 {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_41">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_21">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO DỰ TÍNH</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_22">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐANG IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_23">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐÃ IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_62" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#txtBaoDangIn3, #txtBaoDaIn3, #txtBaoDuTinh3 {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-right: 3px ridge #16a8f0;
+	border-left: 3px ridge #16a8f0;
+	border-top: 3px ridge #16a8f0;
+	border-bottom: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_42">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDuTinh3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDangIn3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDaIn3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_63" native="true">
+               <property name="styleSheet">
+                <string notr="true">#txtBienSoXe3, #txtSanPham3, #txtSLCatLenh3, #txtSLThucXuat3, #txtSoLo3, #txtMangXuat3 {
+	border: 3px ridge #16a8f0;
+	border-radius: 5px;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_43" stretch="30,23,23,23">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_64" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#btnSearchMaIn3 {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+
+#txtMaIn3 {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_44" stretch="35,65">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_65" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_45">
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_24">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>15</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>MÃ IN:</string>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_66" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_22">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>9</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>9</number>
+                      </property>
+                      <item>
+                       <widget class="QLineEdit" name="txtMaIn3">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>20</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>A123456678823413</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="btnSearchMaIn3">
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>assets/loupe.png</normaloff>assets/loupe.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>33</width>
+                          <height>33</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_67" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="1,1">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_68" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_46" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_25">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>BIỂN SỐ XE:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtBienSoXe3">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>14C-12345...</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_69" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_47" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_26">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>SẢN PHẨM:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtSanPham3">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>JQWJKEBNJKAS</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_70" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_24">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_71" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_25" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_72" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_48" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_27">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL CẮT LỆNH (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLCatLenh3">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_73" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_49" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_28">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL THỰC XUẤT (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLThucXuat3">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_74" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_26">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_75" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_27" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_76" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_50" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_29">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SỐ LÔ:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtSoLo3">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_77" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_51" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_30">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>MÁNG XUẤT:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtMangXuat3">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                           <property name="currentText">
+                            <string/>
+                           </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>20</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_78" native="true">
+               <property name="styleSheet">
+                <string notr="true">* {
+	 color: black;
+}
+
+/* === NÚT XANH DƯƠNG === */
+#btnCamera3, #btnChuyenMayIn3, #btnChiTiet3 {
+    border-radius: 5px;
+    border-right: 4px outset #16a8f0;
+    border-left: 4px outset #16a8f0;
+    border-top: 4px outset #16a8f0;
+    border-bottom: 4px outset #16a8f0;
+    background-color: #66cdff;
+    font-weight: bold;
+    padding: 4px 6px;   /* THÊM PADDING */
+}
+
+#btnCamera3:hover, #btnChuyenMayIn3:hover, #btnChiTiet3:hover {
+    background-color: #80d4ff;
+    border-right: 4px outset #1bb8ff;
+    border-left: 4px outset #1bb8ff;
+    border-top: 4px outset #1bb8ff;
+    border-bottom: 4px outset #1bb8ff;
+    padding: 4px 6px;
+}
+
+#btnCamera3:pressed, #btnChuyenMayIn3:pressed, #btnChiTiet3:pressed {
+    background-color: #4db8e6;
+    border-right: 4px inset #0f8cc7;
+    border-left: 4px inset #0f8cc7;
+    border-top: 4px inset #0f8cc7;
+    border-bottom: 4px inset #0f8cc7;
+    padding:4px 6px;
+}
+
+/* === NÚT BẬT IN (XANH LÁ) === */
+#btnBatIn3 {
+    border-radius: 5px;
+    border-right: 4px outset #118c1b;
+    border-left: 4px outset #118c1b;
+    border-top: 4px outset #118c1b;
+    border-bottom: 4px outset #118c1b;
+    background-color: #25fa37;
+    font-weight: bold;
+    padding:4px 6px;
+}
+
+#btnBatIn3:hover {
+    background-color: #40ff50;
+    border-right: 4px outset #14a820;
+    border-left: 4px outset #14a820;
+    border-top: 4px outset #14a820;
+    border-bottom: 4px outset #14a820;
+    padding:4px 6px;
+}
+
+#btnBatIn3:pressed {
+    background-color: #1de62d;
+    border-right: 4px inset #0d7314;
+    border-left: 4px inset #0d7314;
+    border-top: 4px inset #0d7314;
+    border-bottom: 4px inset #0d7314;
+    padding: 4px 6px;
+}
+
+/* === NÚT THÊM CHỨNG TỪ (VÀNG) === */
+#btnThemChungTu3 {
+    border-radius: 5px;
+    border-right: 4px outset #999514;
+    border-left: 4px outset #999514;
+    border-top: 4px outset #999514;
+    border-bottom: 4px outset #999514;
+    background-color: #faf202;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnThemChungTu3:hover {
+    background-color: #ffff33;
+    border-right: 4px outset #b3b317;
+    border-left: 4px outset #b3b317;
+    border-top: 4px outset #b3b317;
+    border-bottom: 4px outset #b3b317;
+    padding :4px 6px;
+}
+
+#btnThemChungTu3:pressed {
+    background-color: #e6e600;
+    border-right: 4px inset #80800f;
+    border-left: 4px inset #80800f;
+    border-top: 4px inset #80800f;
+    border-bottom: 4px inset #80800f;
+    padding: 4px 6px;
+}
+
+/* === NÚT TẮT IN (ĐỎ) === */
+#btnTatIn3 {
+    border-radius: 5px;
+    border-right: 4px outset #a61f1f;
+    border-left: 4px outset #a61f1f;
+    border-top: 4px outset #a61f1f;
+    border-bottom: 4px outset #a61f1f;
+    background-color: #ff3b3b;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnTatIn3:hover {
+    background-color: #ff5252;
+    border-right: 4px outset #c41f1f;
+    border-left: 4px outset #c41f1f;
+    border-top: 4px outset #c41f1f;
+    border-bottom: 4px outset #c41f1f;
+    padding: 4px 6px;
+}
+
+#btnTatIn3:pressed {
+    background-color: #e63333;
+    border-right: 4px inset #8c1919;
+    border-left: 4px inset #8c1919;
+    border-top: 4px inset #8c1919;
+    border-bottom: 4px inset #8c1919;
+    padding: 4px 6px;
+}</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_3">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="1" column="1">
+                 <widget class="QWidget" name="widget_79" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_52">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnTatIn3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Tắt In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/stop-button.png</normaloff>assets/stop-button.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QWidget" name="widget_80" native="true">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>8</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_53">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnCamera3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Xem Camera</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/video-camera.png</normaloff>assets/video-camera.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QWidget" name="widget_81" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_54">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChiTiet3">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chi tiết</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/info.png</normaloff>assets/info.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QWidget" name="widget_82" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_55">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnBatIn3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Bật In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/play-button-arrowhead.png</normaloff>assets/play-button-arrowhead.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QWidget" name="widget_83" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_56">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnThemChungTu3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chứng Từ</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/plus.png</normaloff>assets/plus.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>16</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QWidget" name="widget_84" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_57">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChuyenMayIn3">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chuyển Máy</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_4" native="true"/>
+        <widget class="QWidget" name="widget_4" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_77">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_85" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_59" stretch="10,20,45,25">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_86" native="true">
+               <property name="styleSheet">
+                <string notr="true">*{
+	color: #ffffff;
+}
+
+#labelMay4 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+    	stop: 0 #fb923c,      /* Tâm: Cam đậm */
+    	stop: 0.7 #fed7aa,    /* Giữa: Cam nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #fb923c;
+	border-radius: 8px;
+}
+
+#txtTrangThai4 {
+	background: qradialgradient(
+    	cx: 0.5, cy: 0.5, radius: 1.0,
+    	fx: 0.5, fy: 0.5,
+   		stop: 0 #22c55e,      /* Tâm: Xanh lá đậm */
+    	stop: 0.7 #86efac,    /* Giữa: Xanh lá nhạt */
+    	stop: 1 transparent   /* Viền: Trong suốt → nhạt dần */
+	);
+	border: 1px solid #22c55e;
+	border-radius: 8px;
+}
+
+#btnRefresh4 {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #f8f9fa,     /* Trắng sáng */
+          stop: 0.5 #e9ecef,   /* Xám nhạt */
+          stop: 1 #adb5bd      /* Xám viền */
+      );
+      color: #212529;           /* Chữ xám đậm */
+      border: 2px solid #ced4da; /* Viền xám nhạt */
+      border-radius: 8px;
+}
+
+#btnRefresh4:hover {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #ffffff,     /* Sáng hơn */
+          stop: 0.5 #f1f3f5,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}
+
+#btnRefresh4:pressed {
+	background: qradialgradient(
+          cx: 0.5, cy: 0.5, radius: 0.5,
+          fx: 0.5, fy: 0.5,
+          stop: 0 #e9ecef,
+          stop: 1 #adb5bd
+      );
+	border: 2px solid #ced4da; /* Viền xám nhạt */
+    border-radius: 8px;
+}</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="10,45,45">
+                <item>
+                 <widget class="QPushButton" name="btnRefresh4">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</normaloff>assets/circle-of-two-clockwise-arrows-rotation.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelMay4">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>MÁY 4</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="txtTrangThai4">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>25</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>DỪNG IN</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_87" native="true">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_29" stretch="2,3">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_88" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#label_31, #label_32, #label_33 {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_60">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_31">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO DỰ TÍNH</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_32">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐANG IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_33">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>17</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>BAO ĐÃ IN</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_89" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#txtBaoDangIn4, #txtBaoDaIn4, #txtBaoDuTinh4 {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-right: 3px ridge #16a8f0;
+	border-left: 3px ridge #16a8f0;
+	border-top: 3px ridge #16a8f0;
+	border-bottom: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_61">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDuTinh4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDangIn4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="txtBaoDaIn4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_90" native="true">
+               <property name="styleSheet">
+                <string notr="true">#txtBienSoXe4, #txtSanPham4, #txtSLCatLenh4, #txtSLThucXuat4, #txtSoLo4, #txtMangXuat4 {
+	border: 3px ridge #16a8f0;
+	border-radius: 5px;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_62" stretch="30,23,23,23">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_91" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">#btnSearchMaIn4 {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-right: 4px outset  #16a8f0;
+	border-left: 4px outset  #16a8f0;
+	border-top:4px outset  #16a8f0;
+	border-bottom: 4px outset  #16a8f0;
+	background-color: #66cdff;
+	color: #fff;
+}
+
+#txtMaIn4 {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: 3px ridge #16a8f0;
+}
+</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_63" stretch="35,65">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_92" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_64">
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_34">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>15</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>MÃ IN:</string>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_93" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_30">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>9</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>9</number>
+                      </property>
+                      <item>
+                       <widget class="QLineEdit" name="txtMaIn4">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>20</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>A123456678823413</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="btnSearchMaIn4">
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>assets/loupe.png</normaloff>assets/loupe.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>33</width>
+                          <height>33</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_94" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_31" stretch="1,1">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_95" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_65" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_35">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>BIỂN SỐ XE:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtBienSoXe4">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>14C-12345...</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_96" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_66" stretch="1,1">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>5</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_36">
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>SẢN PHẨM:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="txtSanPham4">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Calibri</family>
+                          <pointsize>18</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>JQWJKEBNJKAS</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_97" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_32">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_98" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_33" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_99" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_67" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_37">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL CẮT LỆNH (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLCatLenh4">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_100" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_68" stretch="1,1">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>15</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_38">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SL THỰC XUẤT (TẤN): </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="txtSLThucXuat4">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>10</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_101" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_34">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_102" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="1,1">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_103" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_69" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_39">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>SỐ LÔ:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtSoLo4">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_104" native="true">
+                        <layout class="QVBoxLayout" name="verticalLayout_70" stretch="1,0">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>5</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_40">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>MÁNG XUẤT:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="txtMangXuat4">
+                           <property name="font">
+                            <font>
+                             <family>Calibri</family>
+                             <pointsize>18</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="editable">
+                            <bool>false</bool>
+                           </property>
+                           <property name="currentText">
+                            <string/>
+                           </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>20</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_105" native="true">
+               <property name="styleSheet">
+                <string notr="true">* {
+	 color: black;
+}
+
+/* === NÚT XANH DƯƠNG === */
+#btnCamera4, #btnChuyenMayIn4, #btnChiTiet4 {
+    border-radius: 5px;
+    border-right: 4px outset #16a8f0;
+    border-left: 4px outset #16a8f0;
+    border-top: 4px outset #16a8f0;
+    border-bottom: 4px outset #16a8f0;
+    background-color: #66cdff;
+    font-weight: bold;
+    padding: 4px 6px;   /* THÊM PADDING */
+}
+
+#btnCamera4:hover, #btnChuyenMayIn4:hover, #btnChiTiet4:hover {
+    background-color: #80d4ff;
+    border-right: 4px outset #1bb8ff;
+    border-left: 4px outset #1bb8ff;
+    border-top: 4px outset #1bb8ff;
+    border-bottom: 4px outset #1bb8ff;
+    padding: 4px 6px;
+}
+
+#btnCamera4:pressed, #btnChuyenMayIn4:pressed, #btnChiTiet4:pressed {
+    background-color: #4db8e6;
+    border-right: 4px inset #0f8cc7;
+    border-left: 4px inset #0f8cc7;
+    border-top: 4px inset #0f8cc7;
+    border-bottom: 4px inset #0f8cc7;
+    padding:4px 6px;
+}
+
+/* === NÚT BẬT IN (XANH LÁ) === */
+#btnBatIn4 {
+    border-radius: 5px;
+    border-right: 4px outset #118c1b;
+    border-left: 4px outset #118c1b;
+    border-top: 4px outset #118c1b;
+    border-bottom: 4px outset #118c1b;
+    background-color: #25fa37;
+    font-weight: bold;
+    padding:4px 6px;
+}
+
+#btnBatIn4:hover {
+    background-color: #40ff50;
+    border-right: 4px outset #14a820;
+    border-left: 4px outset #14a820;
+    border-top: 4px outset #14a820;
+    border-bottom: 4px outset #14a820;
+    padding:4px 6px;
+}
+
+#btnBatIn4:pressed {
+    background-color: #1de62d;
+    border-right: 4px inset #0d7314;
+    border-left: 4px inset #0d7314;
+    border-top: 4px inset #0d7314;
+    border-bottom: 4px inset #0d7314;
+    padding: 4px 6px;
+}
+
+/* === NÚT THÊM CHỨNG TỪ (VÀNG) === */
+#btnThemChungTu4 {
+    border-radius: 5px;
+    border-right: 4px outset #999514;
+    border-left: 4px outset #999514;
+    border-top: 4px outset #999514;
+    border-bottom: 4px outset #999514;
+    background-color: #faf202;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnThemChungTu4:hover {
+    background-color: #ffff33;
+    border-right: 4px outset #b3b317;
+    border-left: 4px outset #b3b317;
+    border-top: 4px outset #b3b317;
+    border-bottom: 4px outset #b3b317;
+    padding :4px 6px;
+}
+
+#btnThemChungTu4:pressed {
+    background-color: #e6e600;
+    border-right: 4px inset #80800f;
+    border-left: 4px inset #80800f;
+    border-top: 4px inset #80800f;
+    border-bottom: 4px inset #80800f;
+    padding: 4px 6px;
+}
+
+/* === NÚT TẮT IN (ĐỎ) === */
+#btnTatIn4 {
+    border-radius: 5px;
+    border-right: 4px outset #a61f1f;
+    border-left: 4px outset #a61f1f;
+    border-top: 4px outset #a61f1f;
+    border-bottom: 4px outset #a61f1f;
+    background-color: #ff3b3b;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+#btnTatIn4:hover {
+    background-color: #ff5252;
+    border-right: 4px outset #c41f1f;
+    border-left: 4px outset #c41f1f;
+    border-top: 4px outset #c41f1f;
+    border-bottom: 4px outset #c41f1f;
+    padding: 4px 6px;
+}
+
+#btnTatIn4:pressed {
+    background-color: #e63333;
+    border-right: 4px inset #8c1919;
+    border-left: 4px inset #8c1919;
+    border-top: 4px inset #8c1919;
+    border-bottom: 4px inset #8c1919;
+    padding: 4px 6px;
+}</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_4">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="1" column="1">
+                 <widget class="QWidget" name="widget_106" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_71">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnTatIn4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Tắt In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/stop-button.png</normaloff>assets/stop-button.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QWidget" name="widget_107" native="true">
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>8</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_72">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnCamera4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Xem Camera</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/video-camera.png</normaloff>assets/video-camera.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QWidget" name="widget_108" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_73">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChiTiet4">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chi tiết</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/info.png</normaloff>assets/info.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QWidget" name="widget_109" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_74">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnBatIn4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Bật In</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/play-button-arrowhead.png</normaloff>assets/play-button-arrowhead.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>18</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QWidget" name="widget_110" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_75">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnThemChungTu4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chứng Từ</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/plus.png</normaloff>assets/plus.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>16</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QWidget" name="widget_111" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_76">
+                   <property name="leftMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnChuyenMayIn4">
+                     <property name="font">
+                      <font>
+                       <family>Calibri</family>
+                       <pointsize>18</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Chuyển Máy</string>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1363,8 +5874,6 @@
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="black-icons/resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

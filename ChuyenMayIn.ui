@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MaySelector762</class>
+ <widget class="QWidget" name="MaySelector762">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>190</width>
+    <height>182</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Chọn Máy In</string>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QWidget {
+        background: white;
+        border: 3px solid #0078d7;
+        border-radius: 12px;
+    }
+
+    /* DỊCH VÒNG TRÒN SANG PHẢI + TĂNG KHOẢNG CÁCH */
+    QRadioButton {
+        spacing: 12px;           /* Khoảng cách giữa vòng tròn và chữ */
+        padding-left: 8px;       /* Dịch toàn bộ sang phải */
+        min-height: 40px;        /* TĂNG CHIỀU CAO DÒNG */
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* Tùy chỉnh vòng tròn radio */
+    QRadioButton::indicator {
+        width: 15px;
+        height: 15px;
+        border-radius: 9px;
+        border: 2px solid #0078d7;
+    }
+
+    QRadioButton::indicator:checked {
+        background-color: #0078d7;
+    }
+
+    QRadioButton:hover {
+        background-color: #f0f8ff;
+        border-radius: 6px;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>15</number>
+   </property>
+   <property name="topMargin">
+    <number>15</number>
+   </property>
+   <property name="rightMargin">
+    <number>15</number>
+   </property>
+   <property name="bottomMargin">
+    <number>15</number>
+   </property>
+   <item>
+    <widget class="QRadioButton" name="radioMay1">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>Máy In 2</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioMay2">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Máy In 3</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioMay3">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>Máy In 4</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assets/printing.png</normaloff>assets/printing.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

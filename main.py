@@ -1,21 +1,17 @@
 # main.py
 import sys
 from PyQt6 import QtWidgets, QtCore, uic
-from controller import Controller
+from ManChinhController import Controller
 
 class MainApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Load UI
         uic.loadUi("ManChinh.ui", self)
-        # Load controller
         self.controller = Controller(self)
 
-        # === HIỆN CỬA SỔ TRƯỚC ===
         self.show()
 
-        # === CĂN PHẦN DƯỚI SÁT TASKBAR ===
         QtCore.QTimer.singleShot(100, self.align_bottom_to_taskbar)
 
     def align_bottom_to_taskbar(self):
