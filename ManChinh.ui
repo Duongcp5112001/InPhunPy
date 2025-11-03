@@ -60,6 +60,10 @@
     <string notr="true">* {
 	font-family: Calibri;
 	font-weight: bold;
+}
+
+#BodyContent, #HeaderContent {
+	background: #95daf9;
 }</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
@@ -85,9 +89,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">* {
-	background-color: #fff;
-}
+       <string notr="true">
 </string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,7,2">
@@ -238,13 +240,12 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">#BodyContent {
-	background-color: #fff;
-}
+       <string notr="true">
 
 #widget, #widget_2, #widget_3, #widget_4 {
 	border: 5px ridge #1482b5;
 	border-radius: 5px;
+	background: #fff
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1,1">
@@ -366,7 +367,7 @@
                <property name="iconSize">
                 <size>
                  <width>25</width>
-                 <height>50</height>
+                 <height>54</height>
                 </size>
                </property>
               </widget>
@@ -1121,7 +1122,12 @@
                         </property>
                         <item>
                          <property name="text">
-                          <string/>
+                          <string>TK-P 1234</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>ádasdasdsd</string>
                          </property>
                         </item>
                        </widget>
@@ -1192,7 +1198,12 @@
                         </property>
                         <item>
                          <property name="text">
-                          <string/>
+                          <string>Máng 1</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Máng 2</string>
                          </property>
                         </item>
                        </widget>
@@ -1773,7 +1784,7 @@
                   <property name="iconSize">
                    <size>
                     <width>25</width>
-                    <height>50</height>
+                    <height>54</height>
                    </size>
                   </property>
                  </widget>
@@ -1787,6 +1798,9 @@
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
+                  </property>
+                  <property name="lineWidth">
+                   <number>0</number>
                   </property>
                   <property name="text">
                    <string>MÁY 2</string>
@@ -2528,7 +2542,12 @@
                            </property>
                            <item>
                             <property name="text">
-                             <string/>
+                             <string>123123</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>123123123</string>
                             </property>
                            </item>
                           </widget>
@@ -2599,7 +2618,12 @@
                            </property>
                            <item>
                             <property name="text">
-                             <string/>
+                             <string>123123123</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>123123</string>
                             </property>
                            </item>
                           </widget>
@@ -3183,7 +3207,7 @@
                   <property name="iconSize">
                    <size>
                     <width>25</width>
-                    <height>50</height>
+                    <height>54</height>
                    </size>
                   </property>
                  </widget>
@@ -3933,6 +3957,19 @@
                            <property name="editable">
                             <bool>false</bool>
                            </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string>123455</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>1234567</string>
+                            </property>
+                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -4001,7 +4038,12 @@
                            </property>
                            <item>
                             <property name="text">
-                             <string/>
+                             <string>1231233546</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>78696789</string>
                             </property>
                            </item>
                           </widget>
@@ -4585,7 +4627,7 @@
                   <property name="iconSize">
                    <size>
                     <width>25</width>
-                    <height>50</height>
+                    <height>54</height>
                    </size>
                   </property>
                  </widget>
@@ -5335,6 +5377,19 @@
                            <property name="editable">
                             <bool>false</bool>
                            </property>
+                           <property name="currentIndex">
+                            <number>-1</number>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string>5768456634</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>szdfbnrdzfb</string>
+                            </property>
+                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -5403,7 +5458,12 @@
                            </property>
                            <item>
                             <property name="text">
-                             <string/>
+                             <string>1235sadfsd</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>bntemtuyht</string>
                             </property>
                            </item>
                           </widget>
