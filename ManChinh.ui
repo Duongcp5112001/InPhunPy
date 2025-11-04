@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1920</width>
-    <height>1000</height>
+    <height>1001</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -89,8 +89,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-</string>
+       <string notr="true"/>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,7,2">
        <property name="spacing">
@@ -835,6 +834,9 @@
                      <property name="text">
                       <string>14C-12345...</string>
                      </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
                     </widget>
                    </item>
                   </layout>
@@ -888,6 +890,9 @@
                      </property>
                      <property name="text">
                       <string>JQWJKEBNJKAS</string>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -975,6 +980,9 @@
                         </property>
                         <property name="text">
                          <string>10</string>
+                        </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -1120,16 +1128,6 @@
                         <property name="currentIndex">
                          <number>-1</number>
                         </property>
-                        <item>
-                         <property name="text">
-                          <string>TK-P 1234</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>ádasdasdsd</string>
-                         </property>
-                        </item>
                        </widget>
                       </item>
                      </layout>
@@ -1434,6 +1432,9 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="btnCamera1">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Calibri</family>
@@ -2255,6 +2256,9 @@
                         <property name="text">
                          <string>14C-12345...</string>
                         </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
+                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -2308,6 +2312,9 @@
                         </property>
                         <property name="text">
                          <string>JQWJKEBNJKAS</string>
+                        </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -2395,6 +2402,9 @@
                            </property>
                            <property name="text">
                             <string>10</string>
+                           </property>
+                           <property name="readOnly">
+                            <bool>true</bool>
                            </property>
                           </widget>
                          </item>
@@ -2540,16 +2550,6 @@
                            <property name="currentIndex">
                             <number>-1</number>
                            </property>
-                           <item>
-                            <property name="text">
-                             <string>123123</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string>123123123</string>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -2854,6 +2854,9 @@
                    </property>
                    <item>
                     <widget class="QPushButton" name="btnCamera2">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Calibri</family>
@@ -3675,6 +3678,9 @@
                         <property name="text">
                          <string>14C-12345...</string>
                         </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
+                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -3728,6 +3734,9 @@
                         </property>
                         <property name="text">
                          <string>JQWJKEBNJKAS</string>
+                        </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -3815,6 +3824,9 @@
                            </property>
                            <property name="text">
                             <string>10</string>
+                           </property>
+                           <property name="readOnly">
+                            <bool>true</bool>
                            </property>
                           </widget>
                          </item>
@@ -3960,16 +3972,6 @@
                            <property name="currentIndex">
                             <number>-1</number>
                            </property>
-                           <item>
-                            <property name="text">
-                             <string>123455</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string>1234567</string>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -4274,6 +4276,9 @@
                    </property>
                    <item>
                     <widget class="QPushButton" name="btnCamera3">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Calibri</family>
@@ -5095,6 +5100,9 @@
                         <property name="text">
                          <string>14C-12345...</string>
                         </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
+                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -5148,6 +5156,9 @@
                         </property>
                         <property name="text">
                          <string>JQWJKEBNJKAS</string>
+                        </property>
+                        <property name="readOnly">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -5235,6 +5246,9 @@
                            </property>
                            <property name="text">
                             <string>10</string>
+                           </property>
+                           <property name="readOnly">
+                            <bool>true</bool>
                            </property>
                           </widget>
                          </item>
@@ -5380,16 +5394,6 @@
                            <property name="currentIndex">
                             <number>-1</number>
                            </property>
-                           <item>
-                            <property name="text">
-                             <string>5768456634</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string>szdfbnrdzfb</string>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -5694,6 +5698,9 @@
                    </property>
                    <item>
                     <widget class="QPushButton" name="btnCamera4">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Calibri</family>
