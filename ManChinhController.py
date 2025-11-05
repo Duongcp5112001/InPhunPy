@@ -1,15 +1,22 @@
 # controller.py
 from PyQt6 import QtWidgets
-from PyQt6.QtCore import QTimer, QDateTime, Qt
-from PyQt6.QtWidgets import QMenu, QWidgetAction,QMessageBox
+from PyQt6.QtCore import QTimer, QDateTime, Qt, QThread, pyqtSignal
+from PyQt6.QtWidgets import QMenu, QWidgetAction, QMessageBox, QDialog
 from PyQt5 import QtCore
-from ChuyenMayInController import MaySelectorWidget
+
 import sqlite3
-from ConnectDB import get_oracle_connection, get_oracle_test_connection, get_sqlite_log_connection, get_sqlite_pause_print_connection, get_sqlite_printer_connection, get_sqlite_camera_connection
-from HienCameraController import CameraViewer
+import socket
+import threading
 import subprocess
 import platform
+
+from ConnectDB import get_oracle_connection, get_oracle_test_connection, get_sqlite_log_connection, get_sqlite_pause_print_connection, get_sqlite_printer_connection, get_sqlite_camera_connection
+from HienCameraController import CameraViewer
+from ChuyenMayInController import MaySelectorWidget
 from ChonChungTuController import ChungTuForm
+from PrinterClient import PrinterClient
+from BaoRachVoForm import BaoRachVoForm
+
 
 class Controller:
     def __init__(self, window):
@@ -27,6 +34,21 @@ class Controller:
         self.tat_ca_so_lo = []
         #Lưu ID chứng từ cho từng máy in
         self.chung_tu_ids = [None] * 5
+        # self.conn_oracle = get_oracle_connection
+        self.conn_oracle = get_oracle_test_connection
+
+        # === VIDEOJET 1530 CONTROL ===
+        self.printer_clients = [None] * 5  # index 1-4
+        self.printer_ips = [""] * 5
+        self.current_machine_check = 1
+
+        # Timer gửi GA/E mỗi 2s
+        self.update_bao_timer = QTimer()
+        self.update_bao_timer.timeout.connect(self.update_bao_cycle)
+        self.update_bao_timer.start(300)
+
+        # Tải IP
+        self.load_printer_ips()
 
         self.setup_them_chung_tu_buttons()
         self.cap_nhat_dong_ho()
@@ -68,27 +90,27 @@ class Controller:
                 status_label = getattr(self.ui, f"txtTrangThai{idx}")
                 status_text = status_label.text().strip().upper()
 
-                # Các widget cần xử lý
+                # === DANH SÁCH CÁC WIDGET ===
                 fields = [
                     f"txtMaIn{idx}", f"txtBienSoXe{idx}", f"txtSanPham{idx}",
-                    f"txtSLCatLenh{idx}", f"txtMangXuat{idx}", f"btnRefresh{idx}"
+                    f"txtSLCatLenh{idx}", f"txtSLThucXuat{idx}", f"btnRefresh{idx}"
                 ]
                 buttons = [
-                    f"btnThemChungTu{idx}", f"btnBatIn{idx}",
-                    f"btnSearchMaIn{idx}", f"btnTatIn{idx}"
+                    f"btnThemChungTu{idx}", f"btnSearchMaIn{idx}",
+                    f"btnRefresh{idx}"
                 ]
 
-                # ===== ĐANG IN =====
+                # ===== TRẠNG THÁI: ĐANG IN =====
                 if status_text == "ĐANG IN":
-                    # Làm đỏ gradient label
+                    # Đổi màu label
                     status_label.setStyleSheet("""
                         QLabel {
                             background: qradialgradient(
                                 cx:0.5, cy:0.5, radius:0.9,
                                 fx:0.5, fy:0.5,
-                                stop:0 #cc0000,      /* Tâm: đỏ đậm */
-                                stop:0.4 #ff3333,    /* Giữa: đỏ sáng hơn */
-                                stop:1 #ffe6e6       /* Viền: đỏ nhạt gần trắng */
+                                stop:0 #cc0000,
+                                stop:0.4 #ff3333,
+                                stop:1 #ffe6e6
                             );
                             color: white;
                             font-weight: bold;
@@ -98,7 +120,7 @@ class Controller:
                         }
                     """)
 
-                    # Khóa các field và nút
+                    # KHÓA TẤT CẢ FIELD
                     for field_name in fields:
                         widget = getattr(self.ui, field_name, None)
                         if widget:
@@ -107,28 +129,26 @@ class Controller:
                             if hasattr(widget, "setEnabled"):
                                 widget.setEnabled(False)
 
-                    # Disable các nút thêm chứng từ, bật in, search mã in
-                    for btn_name in buttons[:-1]:  # trừ btnTatIn
+                    # KHÓA CÁC NÚT CƠ BẢN + btnBatIn
+                    for btn_name in buttons + [f"btnBatIn{idx}"]:
                         btn = getattr(self.ui, btn_name, None)
                         if btn:
                             btn.setEnabled(False)
 
-                    # btnTatIn vẫn được bật
+                    # MỞ btnTatIn + btnChuyenMayIn
                     btn_tat_in = getattr(self.ui, f"btnTatIn{idx}", None)
+                    btn_chuyen = getattr(self.ui, f"btnChuyenMayIn{idx}", None)
                     if btn_tat_in:
                         btn_tat_in.setEnabled(True)
+                    if btn_chuyen:
+                        btn_chuyen.setEnabled(True)
 
-                # ===== DỪNG IN =====
+                # ===== TRẠNG THÁI: DỪNG IN =====
                 elif status_text == "DỪNG IN":
-                    # Trả màu về mặc định
+                    # Trả màu mặc định
                     status_label.setStyleSheet("")
 
-                    # Disable duy nhất btnTatIn
-                    btn_tat_in = getattr(self.ui, f"btnTatIn{idx}", None)
-                    if btn_tat_in:
-                        btn_tat_in.setEnabled(False)
-
-                    # Các field và nút khác mở lại
+                    # MỞ TẤT CẢ FIELD
                     for field_name in fields:
                         widget = getattr(self.ui, field_name, None)
                         if widget:
@@ -136,10 +156,31 @@ class Controller:
                                 widget.setReadOnly(False)
                             if hasattr(widget, "setEnabled"):
                                 widget.setEnabled(True)
-                    for btn_name in buttons[:-1]:
+
+                    # MỞ CÁC NÚT CƠ BẢN
+                    for btn_name in buttons:
                         btn = getattr(self.ui, btn_name, None)
                         if btn:
                             btn.setEnabled(True)
+
+                    # TẮT btnTatIn + btnChuyenMayIn
+                    btn_tat_in = getattr(self.ui, f"btnTatIn{idx}", None)
+                    btn_chuyen = getattr(self.ui, f"btnChuyenMayIn{idx}", None)
+                    if btn_tat_in:
+                        btn_tat_in.setEnabled(False)
+                    if btn_chuyen:
+                        btn_chuyen.setEnabled(False)
+
+                    # === QUẢN LÝ btnBatIn ===
+                    ma_in = getattr(self.ui, f'txtMaIn{idx}').text().strip()
+                    bao_du_tinh = getattr(self.ui, f'txtBaoDuTinh{idx}').text().strip()
+                    btn_bat_in = getattr(self.ui, f'btnBatIn{idx}', None)
+                    if btn_bat_in:
+                        if ma_in and bao_du_tinh != "0":
+                            btn_bat_in.setEnabled(True)
+                        else:
+                            btn_bat_in.setEnabled(False)
+
             except Exception as e:
                 print(f"Lỗi khi kiểm tra trạng thái máy in {idx}: {e}")
     #------------------------------------------------------------------------------
@@ -268,6 +309,11 @@ class Controller:
         combo = getattr(self.ui, f'txtSoLo{idx}')
         combo.clearEditText()           # XÓA TEXT HIỆN TẠI
         combo.setCurrentIndex(-1)       # KHÔNG CHỌN GÌ
+
+        #Disable nút tắt in
+        btn_tat_in = getattr(self.ui, f'btnTatIn{idx}', None)
+        if btn_tat_in:
+            btn_tat_in.setEnabled(False)
     #----------------------------------------------------------------------------------
     #Hiển thị camera
     def setup_camera_buttons(self):
@@ -512,7 +558,7 @@ class Controller:
     def load_tat_ca_so_lo(self):
         """Tải tất cả số lô từ database"""
         try:
-            conn = get_oracle_connection()
+            conn = self.conn_oracle()
             if not conn:
                 print("Không thể kết nối Oracle để lấy dữ liệu số lô")
                 return []
@@ -572,7 +618,7 @@ class Controller:
     def load_mang_xuat_data(self):
         """Lấy dữ liệu máng xuất từ database và gán vào các comboBox txtMangXuat"""
         try:
-            conn = get_oracle_connection()
+            conn = self.conn_oracle()
             if not conn:
                 print("Không thể kết nối Oracle để lấy dữ liệu máng xuất")
                 return
@@ -618,7 +664,7 @@ class Controller:
             QMessageBox.critical(self.window, "Lỗi DB", "Không có số chứng từ để cập nhật thời gian bắt đầu!")
             return False
 
-        conn = get_oracle_connection()
+        conn = self.conn_oracle()
         if not conn:
             QMessageBox.critical(self.window, "Lỗi Kết Nối", "Không thể kết nối Oracle để cập nhật FromTime!")
             return False
@@ -669,7 +715,7 @@ class Controller:
 
             # Dữ liệu log
             log_data = {
-                'PrinterID': idx,
+                'PrinterID': f'Máy {idx}',
                 'Event': 'BẬT IN',
                 'PrintCode': ma_in or 'N/A',
                 'TotalPrintQuantity': tong_bao_int,
@@ -755,7 +801,7 @@ class Controller:
                 return False
 
             # 4. Cập nhật Oracle
-            conn = get_oracle_connection()
+            conn = self.conn_oracle()
             if not conn:
                 QMessageBox.critical(self.window, "Lỗi DB", "Không thể kết nối Oracle!")
                 return False
@@ -804,7 +850,7 @@ class Controller:
         if not name_value:
             return None
 
-        conn = get_oracle_connection()
+        conn = self.conn_oracle()
         if not conn:
             return None
 
@@ -822,7 +868,6 @@ class Controller:
                 cursor.close()
             if 'conn' in locals():
                 conn.close()
-
     #3. Cập nhật sqlite
     def ghi_log_tat_in(self, idx):
         """Ghi log vào SQLite khi TẮT IN - dùng get_sqlite_log_connection()"""
@@ -849,13 +894,13 @@ class Controller:
 
             # Dữ liệu log
             log_data = {
-                'PrinterID': idx,
+                'PrinterID': f'Máy {idx}',
                 'Event': 'TẮT IN',
                 'PrintCode': ma_in or 'N/A',
                 'TotalPrintQuantity': tong_bao,
                 'PrintedQuantity': da_in,
                 'ErrorQuantity': 0,
-                'Timestamp': QDateTime.currentDateTime().toString("HH:mm:ss dd/MM/yyyy")
+                'Timestamp': QDateTime.currentDateTime().toString("HH:mm:ss dd-MM-yyyy")
             }
 
             # DÙNG HÀM TỪ ConnectDB
@@ -909,42 +954,68 @@ class Controller:
             txtSoLo = getattr(self.ui, f'txtSoLo{idx}')
             txtSLThucXuat = getattr(self.ui, f'txtSLThucXuat{idx}')
             txtMangXuat = getattr(self.ui, f'txtMangXuat{idx}')
+            txtMaIn = getattr(self.ui, f'txtMaIn{idx}')
+            txtBaoDuTinh = getattr(self.ui, f'txtBaoDuTinh{idx}')
 
             bien_so = txtBienSoXe.text().strip()
             so_lo = txtSoLo.currentText().strip() if hasattr(txtSoLo, 'currentText') else txtSoLo.text().strip()
             sl_thuc_xuat = txtSLThucXuat.text().strip()
             mang_xuat = txtMangXuat.currentText().strip() if hasattr(txtMangXuat, 'currentText') else txtMangXuat.text().strip()
+            ma_in = txtMaIn.text().strip()
+            bao_du_tinh = txtBaoDuTinh.text().strip()
+            chung_tu = self.chung_tu_ids[idx]
 
-            # BƯỚC 1: Kiểm tra txtBienSoXe
-            if not bien_so:
-                # Chuyển sang chế độ IN ĐẶC BIỆT
-                self.chuyen_che_do_in_dac_biet(idx)
+            # === BƯỚC 1: KIỂM TRA TRẠNG THÁI MÁY IN ===
+            if getattr(self.ui, f'txtTrangThai{idx}').text().strip().upper() == "ĐANG IN":
+                QMessageBox.information(self.window, "Thông báo", "Máy in đang hoạt động!")
                 return
 
-            # BƯỚC 2: Nếu có biển số → kiểm tra 3 ô còn lại
-            thieu_cac_o = []
-            if not so_lo:
-                thieu_cac_o.append("Số Lô")
-            if not sl_thuc_xuat:
-                thieu_cac_o.append("SL Thực Xuất")
-            if not mang_xuat:
-                thieu_cac_o.append("Máng Xuất")
+            # === BƯỚC 2: KIỂM TRA DỮ LIỆU ===
+            in_dac_biet = not chung_tu  # Không có chứng từ → in đặc biệt
 
-            if thieu_cac_o:
-                # Tạo thông báo chi tiết
-                danh_sach_thieu = ", ".join(thieu_cac_o)
-                QMessageBox.warning(
-                    self.window,
-                    "Thiếu thông tin",
-                    f"Vui lòng điền đầy đủ cho ô: <b>{danh_sach_thieu}</b>"
-                )
+            if in_dac_biet:
+                # Chỉ cần mã in + số lượng
+                if not ma_in or bao_du_tinh == "0":
+                    QMessageBox.warning(self.window, "Lỗi", "Vui lòng nhập mã in và số lượng thực xuất")
+                    return
+            else:
+                # In bình thường → kiểm tra đầy đủ
+                if not bien_so:
+                    QMessageBox.warning(self.window, "Lỗi", "Vui lòng nhập biển số xe")
+                    return
+                thieu = []
+                if not so_lo: thieu.append("Số Lô")
+                if not sl_thuc_xuat: thieu.append("SL Thực Xuất")
+                if not mang_xuat: thieu.append("Máng Xuất")
+                if not ma_in: thieu.append("Mã In")
+                if bao_du_tinh == "0": thieu.append("Số lượng thực xuất")
+                if thieu:
+                    QMessageBox.warning(self.window, "Thiếu thông tin", f"Vui lòng điền: <b>{', '.join(thieu)}</b>")
+                    return
+
+            # === BƯỚC 3: KẾT NỐI MÁY IN ===
+            if not self.connect_to_printer(idx):
                 return
+            client = self.printer_clients[idx]
 
-            # TẤT CẢ ĐỦ → Chuyển sang chế độ IN BÌNH THƯỜNG
-            self.chuyen_che_do_in_binh_thuong(idx)
+            # === BƯỚC 4: GỬI LỆNH BẬT IN ===
+            cmd_t = f"\x02T020001025800000{ma_in}\x03".encode('utf-8')
+            client.send_raw(cmd_t)
+            client.send("RA")
+            client.send("O1")
+
+            # === BƯỚC 5: CẬP NHẬT GIAO DIỆN ===
+            getattr(self.ui, f'txtTrangThai{idx}').setText("ĐANG IN")
+
+            # === BƯỚC 6: GHI LOG & ORACLE ===
+            self.ghi_log_bat_in(idx)
+            if chung_tu:
+                self.cap_nhat_oracle_bat_in(idx)
+
+            print(f"[MÁY {idx}] BẬT IN - MÃ: {ma_in} | Chế độ: {'ĐẶC BIỆT' if in_dac_biet else 'BÌNH THƯỜNG'}")
 
         except Exception as e:
-            print(f"Lỗi khi xử lý Bật In máy {idx}: {e}")
+            print(f"Lỗi bật in máy {idx}: {e}")
             QMessageBox.critical(self.window, "Lỗi", f"Đã xảy ra lỗi khi bật in:\n{e}")
 
     def chuyen_che_do_in_binh_thuong(self, idx):
@@ -962,7 +1033,6 @@ class Controller:
 
         except Exception as e:
             print(f"Lỗi chuyển chế độ in bình thường máy {idx}: {e}")
-
     # Chuyển chế độ IN ĐẶC BIỆT
     def chuyen_che_do_in_dac_biet(self, idx):
         """Thực hiện các bước khi không có biển số → in đặc biệt"""
@@ -977,8 +1047,7 @@ class Controller:
 
         except Exception as e:
             print(f"Lỗi chuyển chế độ in đặc biệt máy {idx}: {e}")
-
-    # Hàm in thực tế (sẽ phát triển sau)
+    # Hàm in thực tế
     def bat_dau_in_binh_thuong(self, idx):
         """Hàm in bình thường"""
         chung_tu_id = self.lay_chung_tu_id(idx)
@@ -1004,7 +1073,6 @@ class Controller:
         """Hàm in đặc biệt - sẽ triển khai sau"""
         QMessageBox.information(self.window, "In Đặc Biệt", f"Đang in đặc biệt (không biển số) cho máy {idx}...")
         # TODO: In mẫu đặc biệt, không có biển số
-    
     #-------------------------------------------------------------------------------------
     #Tắt In
     def setup_tat_in_buttons(self):
@@ -1019,28 +1087,146 @@ class Controller:
             button.clicked.connect(lambda checked=False, midx=idx: self.xu_ly_tat_in(midx))
     
     def xu_ly_tat_in(self, idx):
-        """Xử lý khi nhấn Tắt In"""
-        status_label = getattr(self.ui, f'txtTrangThai{idx}')
-        if status_label.text().strip().upper() != "ĐANG IN":
-            QMessageBox.information(self.window, "Thông báo", "Máy in chưa ở trạng thái ĐANG IN!")
+        """Xử lý khi nhấn Tắt In - phân biệt In Bình Thường và In Đặc Biệt"""
+        try:
+            status_label = getattr(self.ui, f'txtTrangThai{idx}')
+            if status_label.text().strip().upper() != "ĐANG IN":
+                QMessageBox.information(self.window, "Thông báo", "Máy in chưa ở trạng thái ĐANG IN!")
+                return
+
+            # === LẤY DỮ LIỆU ===
+            ma_in = getattr(self.ui, f'txtMaIn{idx}').text().strip()
+            bao_du_tinh = getattr(self.ui, f'txtBaoDuTinh{idx}').text().strip()
+            bao_dang_in = getattr(self.ui, f'txtBaoDangIn{idx}').text().strip()
+            so_lo = getattr(self.ui, f'txtSoLo{idx}').currentText().strip()
+            mang_xuat = getattr(self.ui, f'txtMangXuat{idx}').currentText().strip()
+            chung_tu = self.chung_tu_ids[idx] or ""
+
+            in_dac_biet = not chung_tu
+
+            # === GỬI LỆNH TẮT IN ===
+            client = self.printer_clients[idx]
+            if client and client.socket:
+                client.send("O0")
+
+            # === HỎI RÁCH/THỪA (chỉ khi in bình thường + có bao) ===
+            if not in_dac_biet and bao_dang_in != "0":
+                form = BaoRachVoForm(idx)
+                if form.exec() == QDialog.DialogCode.Accepted:
+                    # Lấy dữ liệu từ form
+                    hanh_dong = form.hanh_dong
+                    bao_rach = form.bao_rach
+                    bao_thua = form.bao_thua
+                    self.xu_ly_sau_tat_in(idx, hanh_dong, bao_rach, bao_thua, ma_in, bao_du_tinh, bao_dang_in, so_lo, mang_xuat, chung_tu)
+                else:
+                    return  # Hủy → không tắt
+            else:
+                # Tắt ngay (in đặc biệt hoặc không có bao)
+                self.xu_ly_sau_tat_in(idx, 1, "0", "0", ma_in, bao_du_tinh, bao_dang_in, so_lo, mang_xuat, chung_tu)
+
+        except Exception as e:
+            print(f"[LỖI] Tắt in máy {idx}: {e}")
+            QMessageBox.critical(self.window, "Lỗi", f"Tắt in thất bại:\n{e}")
+
+    def xu_ly_sau_tat_in(self, idx, hanh_dong, bao_rach, bao_thua, ma_in, bao_du_tinh, bao_dang_in, so_lo, mang_xuat, chung_tu):
+        try:
+            if hanh_dong == 1:
+                self.ghi_log_tat_in(idx)
+                if bao_rach != "0":
+                    self._ghi_log(idx, "BÁO RÁCH", ma_in, bao_du_tinh, bao_rach)
+                if chung_tu:
+                    self.cap_nhat_oracle_tat_in(idx)
+            else:
+                self._ghi_log(idx, "TẠM DỪNG", ma_in, bao_du_tinh, bao_dang_in)
+
+            self.refresh_field(idx)
+            getattr(self.ui, f'txtTrangThai{idx}').setText("DỪNG IN")
+            self.chung_tu_ids[idx] = None
+
+            if self.printer_clients[idx]:
+                self.printer_clients[idx].stop()
+                self.printer_clients[idx] = None
+
+            QMessageBox.information(self.window, "Thành công", f"Đã tắt in máy {idx}!")
+
+        except Exception as e:
+            print(f"Lỗi xử lý sau tắt in: {e}")
+    #-------------------------------------------------------------------------------------
+    #Tắt In
+    def load_printer_ips(self):
+        """Tương đương LoadIPs() + GetPriterIp()"""
+        try:
+            conn = get_sqlite_printer_connection()
+            if not conn:
+                return
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, ip FROM printer WHERE id BETWEEN 1 AND 4")
+            for row in cursor.fetchall():
+                idx, ip = row
+                self.printer_ips[idx] = ip.strip()
+            conn.close()
+            print(f"[IP] Đã tải: {self.printer_ips[1:]}")
+        except Exception as e:
+            print(f"Lỗi tải IP: {e}")
+
+    def connect_to_printer(self, idx):
+        """Tương đương StartClient()"""
+        ip = self.printer_ips[idx]
+        if not ip:
+            QMessageBox.warning(self.window, "Lỗi", f"Chưa cấu hình IP máy {idx}")
+            return False
+
+        if self.printer_clients[idx]:
+            try:
+                if self.printer_clients[idx].socket and self.printer_clients[idx].socket.fileno() != -1:
+                    return True
+            except:
+                pass
+
+        client = PrinterClient(idx, ip)
+        if client.connect():
+            client.data_received.connect(self.on_printer_data)
+            client.disconnected.connect(self.on_printer_disconnected)
+            client.start()
+            self.printer_clients[idx] = client
+            return True
+        else:
+            QMessageBox.critical(self.window, "Lỗi", f"Không kết nối được máy {idx}\nIP: {ip}")
+            return False
+
+    def on_printer_data(self, idx, data):
+        """Xử lý dữ liệu từ máy in"""
+        if len(data) == 11:
+            try:
+                bao = int(data[1:9])
+                current = int(getattr(self.ui, f'txtBaoDaIn{idx}').text() or "0")
+                total = current + bao
+                getattr(self.ui, f'txtBaoDangIn{idx}').setText(str(total))
+            except:
+                pass
+        elif len(data) == 10:
+            status = data[7]
+            label = getattr(self.ui, f'txtTrangThai{idx}')
+            new_status = "ĐANG IN" if status in "13579" else "DỪNG IN"
+            if label.text() != new_status:
+                label.setText(new_status)
+
+    def on_printer_disconnected(self, idx):
+        """Máy in mất kết nối"""
+        print(f"[MÁY {idx}] Mất kết nối")
+        self.printer_clients[idx] = None
+        getattr(self.ui, f'txtTrangThai{idx}').setText("DỪNG IN")
+
+    def update_bao_cycle(self):
+        """Gửi GA + E cho từng máy"""
+        if not self.printer_clients[self.current_machine_check]:
+            self.current_machine_check = (self.current_machine_check % 4) + 1
             return
 
-        reply = QMessageBox.question(
-            self.window,
-            "Xác nhận Tắt In",
-            f"Bạn có chắc muốn <b>tắt in</b> cho máy {idx}?\n"
-            "Dữ liệu sẽ được lưu vào hệ thống.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
+        client = self.printer_clients[self.current_machine_check]
+        if client and client.socket:
+            client.send("GA")
+            client.send("E")
 
-        if reply == QMessageBox.StandardButton.Yes:
-            # Gọi cập nhật + log (sẽ thêm log ở bước sau)
-            if self.cap_nhat_ket_thuc_in(idx):
-                # Thành công → có thể ghi log TẮT IN
-                self.ghi_log_tat_in(idx)
-                QMessageBox.information(self.window, "Thành công", f"Đã tắt in máy {idx} và lưu dữ liệu!")
-            else:
-                # Thất bại → vẫn ĐANG IN
-                QMessageBox.critical(self.window, "Lỗi", "Tắt in thất bại! Vui lòng kiểm tra lại dữ liệu.")
-
+        self.current_machine_check = (self.current_machine_check % 4) + 1
     

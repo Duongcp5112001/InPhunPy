@@ -400,7 +400,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>DỪNG IN</string>
+                <string>ĐANG IN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -737,7 +737,7 @@
                       </font>
                      </property>
                      <property name="text">
-                      <string>A123456678823413</string>
+                      <string/>
                      </property>
                     </widget>
                    </item>
@@ -832,7 +832,7 @@
                       </font>
                      </property>
                      <property name="text">
-                      <string>14C-12345...</string>
+                      <string/>
                      </property>
                      <property name="readOnly">
                       <bool>true</bool>
@@ -889,7 +889,7 @@
                       </font>
                      </property>
                      <property name="text">
-                      <string>JQWJKEBNJKAS</string>
+                      <string/>
                      </property>
                      <property name="readOnly">
                       <bool>true</bool>
@@ -979,7 +979,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>10</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -1036,7 +1036,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>10</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
@@ -2159,7 +2159,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>A123456678823413</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
@@ -2254,7 +2254,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>14C-12345...</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -2311,7 +2311,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>JQWJKEBNJKAS</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -2401,7 +2401,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                            <property name="readOnly">
                             <bool>true</bool>
@@ -2458,7 +2458,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                           </widget>
                          </item>
@@ -3581,7 +3581,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>A123456678823413</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
@@ -3676,7 +3676,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>14C-12345...</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -3733,7 +3733,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>JQWJKEBNJKAS</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -3823,7 +3823,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                            <property name="readOnly">
                             <bool>true</bool>
@@ -3880,7 +3880,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                           </widget>
                          </item>
@@ -5003,7 +5003,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>A123456678823413</string>
+                         <string/>
                         </property>
                        </widget>
                       </item>
@@ -5098,7 +5098,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>14C-12345...</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -5155,7 +5155,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>JQWJKEBNJKAS</string>
+                         <string/>
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
@@ -5245,7 +5245,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                            <property name="readOnly">
                             <bool>true</bool>
@@ -5302,7 +5302,7 @@
                             </font>
                            </property>
                            <property name="text">
-                            <string>10</string>
+                            <string/>
                            </property>
                           </widget>
                          </item>
