@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>XEM CAMERA</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assets/logo_congty-Photoroom.png</normaloff>assets/logo_congty-Photoroom.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

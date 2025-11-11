@@ -91,7 +91,7 @@
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,7,2">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1">
        <property name="spacing">
         <number>6</number>
        </property>
@@ -400,7 +400,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>ĐANG IN</string>
+                <string>DỪNG IN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1993,7 +1993,7 @@
                       </font>
                      </property>
                      <property name="text">
-                      <string>0</string>
+                      <string>120</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>

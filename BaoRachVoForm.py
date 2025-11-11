@@ -1,7 +1,5 @@
-from PyQt6.QtWidgets import (
-    QDialog, QLabel, QLineEdit, QRadioButton,
-    QPushButton, QVBoxLayout, QHBoxLayout
-)
+from PyQt6 import uic
+from PyQt6.QtWidgets import QDialog
 from PyQt6.QtCore import pyqtSignal
 
 class BaoRachVoForm(QDialog):
@@ -10,56 +8,23 @@ class BaoRachVoForm(QDialog):
     def __init__(self, printer_id):
         super().__init__()
         self.printer_id = printer_id
-        self.hanh_dong = 1  # Mặc định: tắt in
-        self.bao_rach = "0"
-        self.bao_thua = "0"
-        self.setWindowTitle(f"Máy {printer_id} - Báo Rách / Thừa")
-        self.setFixedSize(380, 220)
-        self.setup_ui()
+        uic.loadUi('BaoRachVoForm.ui', self)
 
-    def setup_ui(self):
-        layout = QVBoxLayout()
+        # Cập nhật tiêu đề với số máy
+        self.headerLabel.setText(f"XÁC NHẬN KẾT THÚC IN - Máy in {printer_id}")
 
-        layout.addWidget(QLabel(f"<b>MÁY {self.printer_id}</b>"))
+        # Mặc định radio
+        self.radioKetThuc.setChecked(True)
 
-        # Bao rách
-        r_layout = QHBoxLayout()
-        r_layout.addWidget(QLabel("Bao rách:"))
-        self.txt_bao_rach = QLineEdit("0")
-        self.txt_bao_rach.setFixedWidth(80)
-        r_layout.addWidget(self.txt_bao_rach)
-        layout.addLayout(r_layout)
-
-        # Bao thừa
-        t_layout = QHBoxLayout()
-        t_layout.addWidget(QLabel("Bao thừa:"))
-        self.txt_bao_thua = QLineEdit("0")
-        self.txt_bao_thua.setFixedWidth(80)
-        t_layout.addWidget(self.txt_bao_thua)
-        layout.addLayout(t_layout)
-
-        # Hành động
-        self.radio_tat_in = QRadioButton("Tắt in hoàn toàn")
-        self.radio_tam_dung = QRadioButton("Tạm dừng (giữ dữ liệu)")
-        self.radio_tat_in.setChecked(True)
-        layout.addWidget(self.radio_tat_in)
-        layout.addWidget(self.radio_tam_dung)
-
-        # Nút
-        btn_layout = QHBoxLayout()
-        btn_ok = QPushButton("Xác nhận")
-        btn_cancel = QPushButton("Hủy")
-        btn_ok.clicked.connect(self.xac_nhan)
-        btn_cancel.clicked.connect(self.reject)
-        btn_layout.addWidget(btn_ok)
-        btn_layout.addWidget(btn_cancel)
-        layout.addLayout(btn_layout)
-
-        self.setLayout(layout)
+        # Kết nối nút
+        self.btnXacNhan.clicked.connect(self.xac_nhan)
 
     def xac_nhan(self):
-        self.bao_rach = self.txt_bao_rach.text().strip() or "0"
-        self.bao_thua = self.txt_bao_thua.text().strip() or "0"
-        self.hanh_dong = 1 if self.radio_tat_in.isChecked() else 2
-        self.confirmed.emit(self.hanh_dong, self.bao_rach, self.bao_thua, self.printer_id)
+        bao_rach = self.txtBaoRach.text().strip() or "0"
+        bao_thua = self.txtBaoThua.text().strip() or "0"
+        hanh_dong = 1 if self.radioKetThuc.isChecked() else 2
+        try:
+            self.confirmed.emit(hanh_dong, bao_rach, bao_thua, self.printer_id)
+        except Exception:
+            pass
         self.accept()

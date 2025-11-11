@@ -105,11 +105,17 @@ class ChungTuForm(QtWidgets.QWidget):
             cursor = conn.cursor()
             sql = """
             SELECT
-                cml.documentno, cml.timenx, cml.transportno, cbp.ICP_Value, scm.value,
-                mp.value, cml.totalamt, cml.todate
+                cml.documentno,
+                cml.timenx,
+                cml.transportno,
+                cbp.ICP_Value,
+                scm.value,
+                mp.value,
+                cml.totalamt,
+                cml.todate
             FROM M_CommandLatching cml
-            RIGHT JOIN c_submarket scm ON cml.c_submarket_id = scm.c_submarket_id
-            RIGHT JOIN c_bpartner cbp ON cml.c_bpartner_id = cbp.c_bpartner_id
+            LEFT JOIN c_submarket scm ON cml.c_submarket_id = scm.c_submarket_id
+            LEFT JOIN c_bpartner cbp ON cml.c_bpartner_id = cbp.c_bpartner_id
             LEFT JOIN m_product mp ON mp.m_product_id = cml.m_product1_id
             WHERE cml.ismanufacturer = 'Y'
                 AND (cml.isbalance IS NULL OR cml.isbalance = 'N')

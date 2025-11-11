@@ -58,6 +58,7 @@ class Controller:
         self.current_camera_viewer = None
         self.setup_camera_buttons()
         self.setup_sl_thuc_xuat_events()
+        self.setup_ma_in_events()
         self.load_mang_xuat_data()
         self.tat_ca_so_lo = self.load_tat_ca_so_lo() 
         self.setup_so_lo_combobox()
@@ -172,14 +173,10 @@ class Controller:
                         btn_chuyen.setEnabled(False)
 
                     # === QUẢN LÝ btnBatIn ===
-                    ma_in = getattr(self.ui, f'txtMaIn{idx}').text().strip()
-                    bao_du_tinh = getattr(self.ui, f'txtBaoDuTinh{idx}').text().strip()
+                    # Khi đang DỪNG IN, luôn cho phép Bật In
                     btn_bat_in = getattr(self.ui, f'btnBatIn{idx}', None)
                     if btn_bat_in:
-                        if ma_in and bao_du_tinh != "0":
-                            btn_bat_in.setEnabled(True)
-                        else:
-                            btn_bat_in.setEnabled(False)
+                        btn_bat_in.setEnabled(True)
 
             except Exception as e:
                 print(f"Lỗi khi kiểm tra trạng thái máy in {idx}: {e}")
@@ -656,6 +653,7 @@ class Controller:
     #-------------------------------------------------------------------------------------
     #Cập nhật dữ liệu bật in
     #1. Cập nhật oracle
+    
     def cap_nhat_oracle_bat_in(self, idx):
         """Cập nhật FromTime = SYSDATE trong Oracle khi BẬT IN"""
         chung_tu_id = self.lay_chung_tu_id(idx)
@@ -696,6 +694,7 @@ class Controller:
                 cursor.close()
             if 'conn' in locals():
                 conn.close()
+
     #2. Cập nhật log
     def ghi_log_bat_in(self, idx):
         """Ghi log vào SQLite khi BẬT IN - dùng connection từ ConnectDB"""
@@ -994,15 +993,15 @@ class Controller:
                     return
 
             # === BƯỚC 3: KẾT NỐI MÁY IN ===
-            if not self.connect_to_printer(idx):
-                return
-            client = self.printer_clients[idx]
+            # if not self.connect_to_printer(idx):
+            #     return
+            # client = self.printer_clients[idx]
 
-            # === BƯỚC 4: GỬI LỆNH BẬT IN ===
-            cmd_t = f"\x02T020001025800000{ma_in}\x03".encode('utf-8')
-            client.send_raw(cmd_t)
-            client.send("RA")
-            client.send("O1")
+            # # === BƯỚC 4: GỬI LỆNH BẬT IN ===
+            # cmd_t = f"\x02T020001025800000{ma_in}\x03".encode('utf-8')
+            # client.send_raw(cmd_t)
+            # client.send("RA")
+            # client.send("O1")
 
             # === BƯỚC 5: CẬP NHẬT GIAO DIỆN ===
             getattr(self.ui, f'txtTrangThai{idx}').setText("ĐANG IN")
@@ -1229,4 +1228,85 @@ class Controller:
             client.send("E")
 
         self.current_machine_check = (self.current_machine_check % 4) + 1
-    
+    #-------------------------------------------------------------------------------------
+    #Tìm kiếm mã in đang in dở
+    def setup_ma_in_events(self):
+        """Kết nối sự kiện textChanged cho các txtMaIn1..txtMaIn4"""
+        for idx in range(1, 5):
+            widget = getattr(self.ui, f'txtMaIn{idx}', None)
+            if widget:
+                widget.textChanged.connect(lambda text, i=idx: self.on_ma_in_changed(text, i))
+
+    def on_ma_in_changed(self, text: str, machine_idx: int):
+        try:
+            if not text or len(text.strip()) < 6:
+                return
+            search_key = text.strip()[1:]
+            if not search_key:
+                return
+
+            conn = get_sqlite_pause_print_connection()
+            if not conn:
+                print("Không thể mở DB pause_print_information")
+                return
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            try:
+                cur.execute("SELECT MaIn, BaoDaIn, ChungTu FROM information WHERE MaIn LIKE ? ORDER BY Date LIMIT 1", ('%'+search_key,))
+                row = cur.fetchone()
+            except sqlite3.Error as e:
+                print("Lỗi truy vấn pause DB:", e)
+                row = None
+
+            if not row:
+                return
+
+            db_main = row['MaIn'] if 'MaIn' in row.keys() else None
+            bao_da_in = row['BaoDaIn'] if 'BaoDaIn' in row.keys() else None
+            chungtu = row['ChungTu'] if 'ChungTu' in row.keys() else None
+
+            if not db_main:
+                return
+
+            # suffix (từ ký tự 2 trở đi)
+            db_suffix = db_main[1:] if len(db_main) > 1 else db_main
+
+            # Lấy code ca hiện tại
+            ca_text = self.ui.LabelShift.text().strip() if hasattr(self.ui, 'LabelShift') else 'CA 1'
+            ca_code = {"CA 1": "A", "CA 2": "B", "CA 3": "C"}.get(ca_text, "A")
+            new_ma = ca_code + db_suffix
+
+            # Cập nhật txtMaIn (block signals để tránh loop)
+            ma_widget = getattr(self.ui, f'txtMaIn{machine_idx}', None)
+            if ma_widget and ma_widget.text() != new_ma:
+                ma_widget.blockSignals(True)
+                ma_widget.setText(new_ma)
+                ma_widget.blockSignals(False)
+
+            # Cập nhật BaoDaIn
+            bao_widget = getattr(self.ui, f'txtBaoDaIn{machine_idx}', None)
+            if bao_widget and bao_da_in is not None:
+                try:
+                    bao_widget.setText(str(bao_da_in))
+                except Exception:
+                    pass
+
+            # Lưu chung_tu
+            if chungtu is not None:
+                try:
+                    self.chung_tu_ids[machine_idx] = str(chungtu)
+                    print(f"[MÁY {machine_idx}] Lấy chung_tu từ pause DB: {chungtu}")
+                except Exception:
+                    pass
+
+        except Exception as e:
+            print(f"Lỗi khi xử lý txtMaIn thay đổi (Máy {machine_idx}): {e}")
+        finally:
+            try:
+                cur.close()
+            except:
+                pass
+            try:
+                conn.close()
+            except:
+                pass
