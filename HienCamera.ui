@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>assets/logo_congty-Photoroom.png</normaloff>assets/logo_congty-Photoroom.png</iconset>
+    <normaloff>assets/logo_congty-Photoroom.ico</normaloff>assets/logo_congty-Photoroom.ico</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

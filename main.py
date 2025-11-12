@@ -9,7 +9,14 @@ class MainApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("ManChinh.ui", self)
+        # Load UI in a way that works both when running from source and from a PyInstaller bundle
+        base_dir = getattr(sys, '_MEIPASS', os.path.dirname(__file__))
+        ui_path = os.path.join(base_dir, 'ManChinh.ui')
+        if not os.path.exists(ui_path):
+            # Fallback to relative path (useful during development)
+            ui_path = os.path.join(os.path.dirname(__file__), 'ManChinh.ui')
+
+        uic.loadUi(ui_path, self)
         # Đặt icon cửa sổ chính nếu file logo tồn tại
         try:
             logo_path = os.path.join(os.path.dirname(__file__), 'assets', 'logo_congty-Photoroom.png')

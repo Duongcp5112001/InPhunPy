@@ -32,7 +32,7 @@ class ChungTuForm(QtWidgets.QWidget):
 
     def set_window_icon(self):
         """Thiết lập icon cho cửa sổ"""
-        logo_path = r"E:\InPhunPy\assets\logo_congty-Photoroom.png"
+        logo_path = "assets\logo_congty-Photoroom.png"
         if os.path.exists(logo_path):
             self.setWindowIcon(QIcon(logo_path))
         else:
@@ -97,7 +97,7 @@ class ChungTuForm(QtWidgets.QWidget):
             table.setColumnWidth(idx, width)
 
     def load_chung_tu_data(self):
-        conn = get_oracle_test_connection()
+        conn = get_oracle_connection()
         if not conn:
             QtWidgets.QMessageBox.critical(self, "Lỗi", "Không thể kết nối Oracle!")
             return

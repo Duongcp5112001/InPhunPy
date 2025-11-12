@@ -2,7 +2,7 @@
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtCore import QTimer, QDateTime, Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import QMenu, QWidgetAction, QMessageBox, QDialog
-from PyQt5 import QtCore
+from PyQt6 import QtCore
 from PyQt6.QtGui import QIcon
 
 import sqlite3
@@ -56,7 +56,7 @@ class Controller:
         #Lưu ID chứng từ cho từng máy in
         self.chung_tu_ids = [None] * 5
         # self.conn_oracle = get_oracle_connection
-        self.conn_oracle = get_oracle_test_connection
+        self.conn_oracle = get_oracle_connection
 
         # === VIDEOJET 1530 CONTROL ===
         self.printer_clients = [None] * 5  # index 1-4
