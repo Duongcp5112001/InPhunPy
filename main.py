@@ -1,6 +1,8 @@
 # main.py
 import sys
+import os
 from PyQt6 import QtWidgets, QtCore, uic
+from PyQt6.QtGui import QIcon
 from ManChinhController import Controller
 
 class MainApp(QtWidgets.QMainWindow):
@@ -8,6 +10,15 @@ class MainApp(QtWidgets.QMainWindow):
         super().__init__()
 
         uic.loadUi("ManChinh.ui", self)
+        # Đặt icon cửa sổ chính nếu file logo tồn tại
+        try:
+            logo_path = os.path.join(os.path.dirname(__file__), 'assets', 'logo_congty-Photoroom.png')
+            if os.path.exists(logo_path):
+                self.setWindowIcon(QIcon(logo_path))
+            else:
+                print(f"Logo không tìm thấy: {logo_path}")
+        except Exception:
+            pass
         self.controller = Controller(self)
 
         self.show()
@@ -67,5 +78,14 @@ class MainApp(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    # Set global application icon for all windows using absolute path
+    try:
+        logo_path = os.path.join(os.path.dirname(__file__), 'assets', 'logo_congty-Photoroom.png')
+        if os.path.exists(logo_path):
+            app.setWindowIcon(QIcon(logo_path))
+        else:
+            print(f"Logo không tìm thấy (app): {logo_path}")
+    except Exception:
+        pass
     window = MainApp()
     sys.exit(app.exec())

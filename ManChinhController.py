@@ -1,19 +1,22 @@
 # controller.py
-from PyQt6 import QtWidgets
+from PyQt6 import QtWidgets, uic
 from PyQt6.QtCore import QTimer, QDateTime, Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import QMenu, QWidgetAction, QMessageBox, QDialog
 from PyQt5 import QtCore
+from PyQt6.QtGui import QIcon
 
 import sqlite3
 import socket
 import threading
 import subprocess
 import platform
+import os
 
 from ConnectDB import get_oracle_connection, get_oracle_test_connection, get_sqlite_log_connection, get_sqlite_pause_print_connection, get_sqlite_printer_connection, get_sqlite_camera_connection
 from HienCameraController import CameraViewer
 from ChuyenMayInController import MaySelectorWidget
 from ChonChungTuController import ChungTuForm
+from ChiTietController import show_chi_tiet_dialog
 from PrinterClient import PrinterClient
 from BaoRachVoForm import BaoRachVoForm
 
@@ -57,6 +60,7 @@ class Controller:
         self.setup_refresh_buttons()
         self.current_camera_viewer = None
         self.setup_camera_buttons()
+        self.setup_chi_tiet_buttons()
         self.setup_sl_thuc_xuat_events()
         self.setup_ma_in_events()
         self.load_mang_xuat_data()
@@ -317,126 +321,26 @@ class Controller:
         """Thiết lập sự kiện cho các nút camera"""
         camera_buttons = [
             self.ui.btnCamera1,
-            self.ui.btnCamera2, 
+            self.ui.btnCamera2,
             self.ui.btnCamera3,
             self.ui.btnCamera4
         ]
-        
+
         for idx, button in enumerate(camera_buttons, 1):
             button.clicked.connect(lambda checked, machine_num=idx: self.show_camera(machine_num))
 
-    def ping_ip(self, ip):
-        """Ping đến IP để kiểm tra kết nối mạng"""
-        param = '-n' if platform.system().lower() == 'windows' else '-c'
-        try:
-            result = subprocess.run(
-                ['ping', param, '1', ip],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                timeout=3
-            )
-            return result.returncode == 0
-        except:
-            return False
-
-    def get_camera_info(self, machine_number):
-        """Lấy thông tin camera từ database theo số máy in"""
-        try:
-            conn = sqlite3.connect("camera.db")
-            cursor = conn.cursor()
-            
-            cursor.execute("""
-                SELECT ip_address, rtsp_url FROM cameras 
-                WHERE machine_number = ? AND status = 1
-            """, (machine_number,))
-            
-            result = cursor.fetchone()
-            conn.close()
-            
-            if result:
-                return {
-                    'ip': result[0],
-                    'rtsp_url': result[1]
-                }
-            else:
-                print(f"Không tìm thấy thông tin camera cho máy in {machine_number}")
-                return None
-                
-        except sqlite3.Error as e:
-            print(f"Lỗi database: {e}")
-            return None
-
-    def show_camera(self, machine_number):
-        """Hiển thị camera cho máy in được chọn"""
-        # Dừng camera hiện tại nếu có
-        if self.current_camera_viewer:
-            self.current_camera_viewer.stop()
-            self.current_camera_viewer = None
-        
-        # Lấy thông tin camera từ database
-        camera_info = self.get_camera_info(machine_number)
-        
-        if not camera_info:
-            QMessageBox.warning(
-                self.window, 
-                "Lỗi Camera", 
-                f"Không tìm thấy thông tin camera cho máy in {machine_number}\n"
-                f"Vui lòng kiểm tra cấu hình database."
-            )
-            return
-        
-        ip = camera_info['ip']
-        rtsp_url = camera_info['rtsp_url']
-                
-        # Thử ping IP trước khi kết nối camera
-        if not self.ping_ip(ip):
-            QMessageBox.critical(
-                self.window,
-                "Lỗi Kết Nối Mạng",
-                f"❌ KHÔNG THỂ KẾT NỐI ĐẾN MÁY IN {machine_number}\n\n"
-                f"📍 IP: {ip}\n"
-                f"🔍 Nguyên nhân:\n"
-                f"   • Máy in đang tắt\n"
-                f"   • Mất kết nối mạng\n"
-                f"   • Sai địa chỉ IP\n"
-                f"   • Tường lửa chặn kết nối\n\n"
-                f"🛠️ Khắc phục:\n"
-                f"   • Kiểm tra nguồn máy in\n"
-                f"   • Kiểm tra cáp mạng\n"
-                f"   • Liên hệ bộ phận IT"
-            )
-            return
-        
-        # Thử kết nối camera
-        try:
-            self.current_camera_viewer = CameraViewer(self.window, rtsp_url)
-            # Kiểm tra xem camera có khởi tạo thành công không
-            if not self.current_camera_viewer.cap or not self.current_camera_viewer.cap.isOpened():
-                raise Exception("Không thể mở luồng video từ camera")
-                
-        except Exception as e:
-            error_msg = (
-                f"⚠️ KHÔNG THỂ HIỂN THỊ CAMERA MÁY IN {machine_number}\n\n"
-                f"📍 IP: {ip}\n"
-                f"🌐 RTSP: {rtsp_url}\n"
-                f"🔍 Nguyên nhân:\n"
-                f"   • Camera bị tắt\n"
-                f"   • Sai thông tin đăng nhập RTSP\n"
-                f"   • Port RTSP bị chặn\n"
-                f"   • Camera không hỗ trợ RTSP\n\n"
-                f"🛠️ Khắc phục:\n"
-                f"   • Kiểm tra nguồn camera\n"
-                f"   • Xác nhận URL RTSP\n"
-                f"   • Kiểm tra username/password\n"
-                f"   • Liên hệ bộ phận camera"
-            )
-            
-            QMessageBox.critical(self.window, "Lỗi Hiển Thị Camera", error_msg)
-            
-            # Dọn dẹp nếu có lỗi
-            if self.current_camera_viewer:
-                self.current_camera_viewer.stop()
-                self.current_camera_viewer = None
+    def setup_chi_tiet_buttons(self):
+        """Kết nối các nút btnChiTiet1..4 để mở form ChiTiet.ui"""
+        buttons = [
+            getattr(self.ui, 'btnChiTiet1', None),
+            getattr(self.ui, 'btnChiTiet2', None),
+            getattr(self.ui, 'btnChiTiet3', None),
+            getattr(self.ui, 'btnChiTiet4', None),
+        ]
+        for idx, btn in enumerate(buttons, 1):
+            if btn:
+                # capture idx default to avoid late-binding issue in lambda
+                btn.clicked.connect(lambda checked=False, i=idx: show_chi_tiet_dialog(self.window, i))
     #-------------------------------------------------------------------------------------
     #Chọn chứng từ
     def setup_them_chung_tu_buttons(self):
@@ -501,10 +405,8 @@ class Controller:
                 bao_du_tinh = sl_thuc_xuat * 20  # Nhân với 20
                 txt_bao_du_tinh.setText(str(int(bao_du_tinh)))  # Chuyển thành số nguyên
             else:
-                print("Lỗi 1")
                 txt_bao_du_tinh.setText('0')
         except ValueError:
-            print("Lỗi 2")
             txt_bao_du_tinh.setText('0')
     #-------------------------------------------------------------------------------------
     #Lấy số lô từ oracle
@@ -682,7 +584,6 @@ class Controller:
                 QMessageBox.warning(self.window, "Cảnh báo", f"Không tìm thấy chứng từ {chung_tu_id} trong hệ thống!")
                 return False
             else:
-                print(f"[MÁY {idx}] ĐÃ CẬP NHẬT FromTime cho chứng từ: {chung_tu_id}")
                 return True
 
         except Exception as e:
@@ -740,8 +641,6 @@ class Controller:
             '''
             cursor.execute(sql, log_data)
             conn.commit()
-
-            print(f"[LOG] Ghi log BẬT IN thành công - Máy {idx}, Mã in: {ma_in}, Tổng bao: {tong_bao_int}")
 
         except Exception as e:
             print(f"[LỖI LOG] Ghi log BẬT IN thất bại (Máy {idx}): {e}")
@@ -828,8 +727,6 @@ class Controller:
                 QMessageBox.warning(self.window, "Cảnh báo", f"Không tìm thấy chứng từ {chung_tu_id} để cập nhật!")
                 conn.close()
                 return False
-
-            print(f"[MÁY {idx}] ĐÃ CẬP NHẬT KẾT THÚC IN - CT: {chung_tu_id}")
             conn.close()
 
             # 5. Thành công → Reset giao diện + đổi trạng thái
@@ -919,8 +816,6 @@ class Controller:
             '''
             cursor.execute(sql, log_data)
             conn.commit()
-
-            print(f"[LOG] Ghi log TẮT IN thành công - Máy {idx}, Mã in: {ma_in}, Tổng: {tong_bao}, Đã in: {da_in}")
             return True
 
         except Exception as e:
@@ -1010,9 +905,6 @@ class Controller:
             self.ghi_log_bat_in(idx)
             if chung_tu:
                 self.cap_nhat_oracle_bat_in(idx)
-
-            print(f"[MÁY {idx}] BẬT IN - MÃ: {ma_in} | Chế độ: {'ĐẶC BIỆT' if in_dac_biet else 'BÌNH THƯỜNG'}")
-
         except Exception as e:
             print(f"Lỗi bật in máy {idx}: {e}")
             QMessageBox.critical(self.window, "Lỗi", f"Đã xảy ra lỗi khi bật in:\n{e}")
@@ -1023,10 +915,6 @@ class Controller:
             # Cập nhật trạng thái máy in
             status_label = getattr(self.ui, f'txtTrangThai{idx}')
             status_label.setText("ĐANG IN")
-            
-            # Có thể thêm: lưu log, gọi hàm in thật, bật timer theo dõi...
-            print(f"[MÁY {idx}] Đã chuyển sang chế độ IN BÌNH THƯỜNG")
-            
             # Gọi hàm in thực tế (bạn sẽ thêm sau)
             self.bat_dau_in_binh_thuong(idx)
 
@@ -1038,9 +926,7 @@ class Controller:
         try:
             status_label = getattr(self.ui, f'txtTrangThai{idx}')
             status_label.setText("ĐANG IN")  # Vẫn hiển thị đang in
-            
-            print(f"[MÁY {idx}] Đã chuyển sang chế độ IN ĐẶC BIỆT (không có biển số)")
-            
+                    
             # Gọi hàm in đặc biệt
             self.bat_dau_in_dac_biet(idx)
 
@@ -1164,7 +1050,6 @@ class Controller:
                 idx, ip = row
                 self.printer_ips[idx] = ip.strip()
             conn.close()
-            print(f"[IP] Đã tải: {self.printer_ips[1:]}")
         except Exception as e:
             print(f"Lỗi tải IP: {e}")
 

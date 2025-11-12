@@ -134,7 +134,7 @@ class ChungTuForm(QtWidgets.QWidget):
                 stt = str(row_idx + 1)
                 gio_can = self.format_time(timenx)
                 bien_so = (transportno or "").strip()
-                sl_cat_lenh = str(totalamt) if totalamt else "0"
+                sl_cat_lenh = str(totalamt) + " tấn" if totalamt else "0"
                 san_pham = (product_name or "").strip()
                 ngay_can = self.format_date(timenx)
 

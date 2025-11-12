@@ -62,9 +62,17 @@
 	font-weight: bold;
 }
 
-#BodyContent, #HeaderContent {
-	background: #95daf9;
-}</string>
+#HeaderContent {
+	background: #ffffff;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border: 4px outset  #889399;
+}
+
+#MainScreen {
+	background: #dae2e6;
+}
+</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
     <property name="spacing">
@@ -89,17 +97,19 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">* {
+	color: black;
+}</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1">
        <property name="spacing">
-        <number>6</number>
+        <number>0</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>6</number>
        </property>
        <property name="rightMargin">
         <number>0</number>
@@ -112,9 +122,9 @@
          <widget class="QLabel" name="Logo">
           <property name="geometry">
            <rect>
-            <x>9</x>
-            <y>10</y>
-            <width>111</width>
+            <x>10</x>
+            <y>0</y>
+            <width>91</width>
             <height>111</height>
            </rect>
           </property>
@@ -155,6 +165,8 @@
               <pointsize>40</pointsize>
               <weight>75</weight>
               <bold>true</bold>
+              <strikeout>false</strikeout>
+              <kerning>true</kerning>
              </font>
             </property>
             <property name="text">
@@ -239,10 +251,8 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-
-#widget, #widget_2, #widget_3, #widget_4 {
-	border: 5px ridge #1482b5;
+       <string notr="true">#widget, #widget_2, #widget_3, #widget_4 {
+	border: 5px ridge #16a8f0;
 	border-radius: 5px;
 	background: #fff
 }</string>
@@ -250,6 +260,18 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1,1">
        <property name="spacing">
         <number>15</number>
+       </property>
+       <property name="leftMargin">
+        <number>9</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
        </property>
        <item>
         <widget class="QWidget" name="widget" native="true">
@@ -273,7 +295,7 @@
            <widget class="QWidget" name="widget_5" native="true">
             <property name="styleSheet">
              <string notr="true">*{
-	color: #ffffff;
+	color: #000;
 }
 
 #labelMay1 {
@@ -430,7 +452,7 @@
 	border-top:4px outset  #16a8f0;
 	border-bottom: 4px outset  #16a8f0;
 	background-color: #66cdff;
-	color: #fff;
+	color: #000;
 }
 </string>
                </property>
@@ -1706,7 +1728,7 @@
               <widget class="QWidget" name="widget_31" native="true">
                <property name="styleSheet">
                 <string notr="true">*{
-	color: #ffffff;
+	color: #000;
 }
 
 #labelMay2 {
@@ -1852,7 +1874,7 @@
 	border-top:4px outset  #16a8f0;
 	border-bottom: 4px outset  #16a8f0;
 	background-color: #66cdff;
-	color: #fff;
+	color: #000;
 }
 </string>
                   </property>
@@ -1993,7 +2015,7 @@
                       </font>
                      </property>
                      <property name="text">
-                      <string>120</string>
+                      <string>0</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
@@ -3131,7 +3153,7 @@
               <widget class="QWidget" name="widget_59" native="true">
                <property name="styleSheet">
                 <string notr="true">*{
-	color: #ffffff;
+	color: #000;
 }
 
 #labelMay3 {
@@ -3274,7 +3296,7 @@
 	border-top:4px outset  #16a8f0;
 	border-bottom: 4px outset  #16a8f0;
 	background-color: #66cdff;
-	color: #fff;
+	color: #000;
 }
 </string>
                   </property>
@@ -3300,6 +3322,9 @@
                        <weight>75</weight>
                        <bold>true</bold>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
                      </property>
                      <property name="text">
                       <string>BAO DỰ TÍNH</string>
@@ -4553,7 +4578,7 @@
               <widget class="QWidget" name="widget_86" native="true">
                <property name="styleSheet">
                 <string notr="true">*{
-	color: #ffffff;
+	color: #000;
 }
 
 #labelMay4 {
@@ -4696,7 +4721,7 @@
 	border-top:4px outset  #16a8f0;
 	border-bottom: 4px outset  #16a8f0;
 	background-color: #66cdff;
-	color: #fff;
+	color: #000;
 }
 </string>
                   </property>
