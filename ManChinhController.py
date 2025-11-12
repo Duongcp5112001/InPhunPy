@@ -20,6 +20,24 @@ from ChiTietController import show_chi_tiet_dialog
 from PrinterClient import PrinterClient
 from BaoRachVoForm import BaoRachVoForm
 
+# Suppress non-error modal dialogs: information/warning will be printed instead of shown.
+# Keep QMessageBox.critical unchanged so real errors still show.
+def _silent_information(parent, title, text, *args, **kwargs):
+    try:
+        print(f"[INFO] {title}: {text}")
+    except Exception:
+        pass
+
+def _silent_warning(parent, title, text, *args, **kwargs):
+    try:
+        print(f"[WARNING] {title}: {text}")
+    except Exception:
+        pass
+
+# Replace the functions used to show non-critical dialogs
+QMessageBox.information = _silent_information
+QMessageBox.warning = _silent_warning
+
 
 class Controller:
     def __init__(self, window):
@@ -861,7 +879,8 @@ class Controller:
 
             # === BƯỚC 1: KIỂM TRA TRẠNG THÁI MÁY IN ===
             if getattr(self.ui, f'txtTrangThai{idx}').text().strip().upper() == "ĐANG IN":
-                QMessageBox.information(self.window, "Thông báo", "Máy in đang hoạt động!")
+                # Previously showed a modal info box; now just log
+                print(f"[INFO] Máy {idx} đang hoạt động, bỏ qua lệnh Bật In")
                 return
 
             # === BƯỚC 2: KIỂM TRA DỮ LIỆU ===
@@ -870,12 +889,13 @@ class Controller:
             if in_dac_biet:
                 # Chỉ cần mã in + số lượng
                 if not ma_in or bao_du_tinh == "0":
-                    QMessageBox.warning(self.window, "Lỗi", "Vui lòng nhập mã in và số lượng thực xuất")
+                    # Previously used QMessageBox.warning; now log
+                    print(f"[WARNING] Vui lòng nhập mã in và số lượng thực xuất (Máy {idx})")
                     return
             else:
                 # In bình thường → kiểm tra đầy đủ
                 if not bien_so:
-                    QMessageBox.warning(self.window, "Lỗi", "Vui lòng nhập biển số xe")
+                    print(f"[WARNING] Vui lòng nhập biển số xe (Máy {idx})")
                     return
                 thieu = []
                 if not so_lo: thieu.append("Số Lô")
@@ -884,19 +904,19 @@ class Controller:
                 if not ma_in: thieu.append("Mã In")
                 if bao_du_tinh == "0": thieu.append("Số lượng thực xuất")
                 if thieu:
-                    QMessageBox.warning(self.window, "Thiếu thông tin", f"Vui lòng điền: <b>{', '.join(thieu)}</b>")
+                    print(f"[WARNING] Thiếu thông tin: {', '.join(thieu)} (Máy {idx})")
                     return
 
             # === BƯỚC 3: KẾT NỐI MÁY IN ===
-            # if not self.connect_to_printer(idx):
-            #     return
-            # client = self.printer_clients[idx]
+            if not self.connect_to_printer(idx):
+                return
+            client = self.printer_clients[idx]
 
-            # # === BƯỚC 4: GỬI LỆNH BẬT IN ===
-            # cmd_t = f"\x02T020001025800000{ma_in}\x03".encode('utf-8')
-            # client.send_raw(cmd_t)
-            # client.send("RA")
-            # client.send("O1")
+            # === BƯỚC 4: GỬI LỆNH BẬT IN ===
+            cmd_t = f"\x02T020001025800000{ma_in}\x03".encode('utf-8')
+            client.send_raw(cmd_t)
+            client.send("RA")
+            client.send("O1")
 
             # === BƯỚC 5: CẬP NHẬT GIAO DIỆN ===
             getattr(self.ui, f'txtTrangThai{idx}').setText("ĐANG IN")
@@ -909,35 +929,12 @@ class Controller:
             print(f"Lỗi bật in máy {idx}: {e}")
             QMessageBox.critical(self.window, "Lỗi", f"Đã xảy ra lỗi khi bật in:\n{e}")
 
-    def chuyen_che_do_in_binh_thuong(self, idx):
-        """Thực hiện các bước khi đủ dữ liệu → in bình thường"""
-        try:
-            # Cập nhật trạng thái máy in
-            status_label = getattr(self.ui, f'txtTrangThai{idx}')
-            status_label.setText("ĐANG IN")
-            # Gọi hàm in thực tế (bạn sẽ thêm sau)
-            self.bat_dau_in_binh_thuong(idx)
-
-        except Exception as e:
-            print(f"Lỗi chuyển chế độ in bình thường máy {idx}: {e}")
-    # Chuyển chế độ IN ĐẶC BIỆT
-    def chuyen_che_do_in_dac_biet(self, idx):
-        """Thực hiện các bước khi không có biển số → in đặc biệt"""
-        try:
-            status_label = getattr(self.ui, f'txtTrangThai{idx}')
-            status_label.setText("ĐANG IN")  # Vẫn hiển thị đang in
-                    
-            # Gọi hàm in đặc biệt
-            self.bat_dau_in_dac_biet(idx)
-
-        except Exception as e:
-            print(f"Lỗi chuyển chế độ in đặc biệt máy {idx}: {e}")
-    # Hàm in thực tế
     def bat_dau_in_binh_thuong(self, idx):
         """Hàm in bình thường"""
         chung_tu_id = self.lay_chung_tu_id(idx)
         if not chung_tu_id:
-            QMessageBox.warning(self.window, "Lỗi", "Chưa chọn chứng từ hợp lệ!")
+            # Was a warning dialog; now log and return
+            print(f"[WARNING] Chưa chọn chứng từ hợp lệ cho máy {idx}")
             return
 
         # 1. Cập nhật Oracle
@@ -947,16 +944,13 @@ class Controller:
         if not self.ghi_log_bat_in(idx):
             return
 
-        # 2. Tiếp tục in
-        QMessageBox.information(
-            self.window,
-            "In Bình Thường",
-            f"Đang in bình thường cho máy {idx}\nSố chứng từ: {chung_tu_id}\nĐã ghi thời gian bắt đầu."
-        )
+        # # 2. Tiếp tục in (no modal on success)
+        # print(f"[INFO] Đang in bình thường cho máy {idx}, chứng từ: {chung_tu_id}")
 
     def bat_dau_in_dac_biet(self, idx):
         """Hàm in đặc biệt - sẽ triển khai sau"""
-        QMessageBox.information(self.window, "In Đặc Biệt", f"Đang in đặc biệt (không biển số) cho máy {idx}...")
+        # Do not show modal info; log instead
+        print(f"[INFO] In đặc biệt (không biển số) cho máy {idx}...")
         # TODO: In mẫu đặc biệt, không có biển số
     #-------------------------------------------------------------------------------------
     #Tắt In
